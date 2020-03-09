@@ -41,7 +41,7 @@
         android:layout_marginTop="8dp"
         android:background="#4CAF50"
         android:enabled="false"
-        android:onClick="StartGame"
+        android:onClick="onClickStartGame"
         android:text="Start Game"
         android:textColor="#030FF4"
         android:textStyle="bold"

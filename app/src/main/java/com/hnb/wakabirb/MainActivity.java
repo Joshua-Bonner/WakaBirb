@@ -21,7 +21,8 @@ public class MainActivity extends AppCompatActivity {
         EditText userName = findViewById(R.id.EditUsrName);
         final Button startGameBtn = findViewById(R.id.StartButton);
 
-        //Add textWatcher to notify the user
+        // THE FOLLOWING INSURES THAT A USER CANNOT ENTER INTO THE GAME WITHOUT FIRST
+        // PUTTING IN A VALUE FOR USERNAME
         userName.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence userName, int start, int count, int after) {
@@ -42,12 +43,12 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable userName) {
-
+                // TODO: QUERY FOR THE EXISTENCE OF THE USERNAME AND RETRIEVE ASSOCIATED DATA
             }
         });
     }
 
-    public void StartGame(View button){
+    public void onClickStartGame(View button){
         Intent gameIntent = new Intent(this, GameActivity.class);
         startActivity(gameIntent);
     }
