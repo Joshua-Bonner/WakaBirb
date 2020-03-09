@@ -39,12 +39,48 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:background="#4CAF50"
+        android:enabled="false"
+        android:onClick="StartGame"
         android:text="Start Game"
-        android:background="#8BC34A"
-        android:textColor="#03A9F4"
+        android:textColor="#030FF4"
+        android:textStyle="bold"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/EditUsrName"
-        android:onClick="StartGame"/>
+        app:layout_constraintTop_toBottomOf="@+id/EditUsrName" />
+
+    <ImageView
+        android:id="@+id/redBirb"
+        android:layout_width="101dp"
+        android:layout_height="97dp"
+        android:layout_marginBottom="32dp"
+        app:layout_constraintBottom_toTopOf="@+id/hairBirb"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.132"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/birb" />
+
+    <ImageView
+        android:id="@+id/hairBirb"
+        android:layout_width="101dp"
+        android:layout_height="97dp"
+        android:layout_marginBottom="32dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.561"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/birb_hair" />
+
+    <ImageView
+        android:id="@+id/purpleBirb"
+        android:layout_width="101dp"
+        android:layout_height="97dp"
+        android:layout_marginBottom="32dp"
+        app:layout_constraintBottom_toTopOf="@+id/hairBirb"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.687"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/birb_purple" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
