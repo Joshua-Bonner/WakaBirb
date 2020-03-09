@@ -24,13 +24,13 @@ public class MainActivity extends AppCompatActivity {
         //Add textWatcher to notify the user
         userName.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            public void beforeTextChanged(CharSequence userName, int start, int count, int after) {
 
             }
 
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(s.toString().trim().length()==0) {
+            public void onTextChanged(CharSequence userName, int start, int before, int count) {
+                if(userName.toString().trim().length()==0) {
                     startGameBtn.setEnabled(false);
                     startGameBtn.setVisibility(View.INVISIBLE);
                     Toast.makeText(MainActivity.this, "Text can not be empty", Toast.LENGTH_SHORT).show();
@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @Override
-            public void afterTextChanged(Editable s) {
+            public void afterTextChanged(Editable userName) {
 
             }
         });
