@@ -42,4 +42,14 @@ public abstract class ScoreDatabase extends RoomDatabase {
             }
         }.execute(score);
     }
+
+    public static void update(Score score) {
+        new AsyncTask<Score, Void, Void>() {
+            @Override
+            protected Void doInBackground(Score... scores) {
+                INSTANCE.ScoreDAO().update(scores);
+                return null;
+            }
+        }.execute(score);
+    }
 }

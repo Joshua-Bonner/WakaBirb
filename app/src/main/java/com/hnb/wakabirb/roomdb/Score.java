@@ -10,23 +10,18 @@ import java.util.GregorianCalendar;
 public class Score {
 
     public Score(String name, int points) {
-        id = 0;
         this.name = name;
         this.points = points;
         date = new GregorianCalendar();
     }
 
-    public Score(int id, String name, int points, GregorianCalendar date) {
-        this.id = id;
+    public Score(String name, int points, GregorianCalendar date) {
         this.name = name;
         this.points = points;
         this.date = date;
     }
 
-    @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "scoreid")
-    public int id;
-
+    @PrimaryKey
     @ColumnInfo(name = "name")
     public String name;
 
