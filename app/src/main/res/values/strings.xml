@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">WakaBirb</string>
+    <string name="musicOnKey">musicOnKey</string>
+    <string name="Music">Enable Music</string>
+    <string name="MusicCheckboxSummary">Uncheck to turn background music off</string>
+    <string name="seOnKey">soundEffectsOn</string>
+    <string name="SoundEffects">Enable Sound Effects</string>
+    <string name="SoundEffectsCheckboxSummary">Uncheck to turn sound effects off</string>
+    <string name ="MusicCatTitle">Music Settings</string>
+    <string name="OtherSettings">Other Settings</string>
+    <string name="menu_settings">Settings</string>
+    <string name="settings">Birb Settings</string>
+    <string name="other_stuff">Birb Stuff</string>
 </resources>

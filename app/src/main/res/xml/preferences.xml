@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory
+        android:text="@string/MusicCatTitle"
+        android:title="@string/MusicCatTitle"
+        tools:text="@string/MusicCatTitle"/>
+        <SwitchPreference
+            android:defaultValue="true"
+            android:key="@string/musicOnKey"
+            android:title="@string/Music" />
+
+        <SwitchPreference
+            android:defaultValue="true"
+            android:key="@string/seOnKey"
+            android:title="@string/SoundEffects" />
+
+    <PreferenceCategory
+        android:title = "@string/OtherSettings"/>
+
+</PreferenceScreen>
