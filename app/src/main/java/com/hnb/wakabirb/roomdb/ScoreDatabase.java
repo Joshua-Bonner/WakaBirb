@@ -7,10 +7,12 @@ import androidx.annotation.NonNull;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.room.TypeConverter;
+import androidx.room.TypeConverters;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
 @Database(entities = {Score.class}, version = 1, exportSchema = false)
-
+@TypeConverters({Converters.class})
 public abstract class ScoreDatabase extends RoomDatabase {
     public abstract ScoreDAO ScoreDAO();
 
