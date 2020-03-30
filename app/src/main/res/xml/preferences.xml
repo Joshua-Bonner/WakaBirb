@@ -6,6 +6,7 @@
         android:text="@string/MusicCatTitle"
         android:title="@string/MusicCatTitle"
         tools:text="@string/MusicCatTitle"/>
+
         <SwitchPreference
             android:defaultValue="true"
             android:key="@string/musicOnKey"

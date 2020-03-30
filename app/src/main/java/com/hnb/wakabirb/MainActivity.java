@@ -3,14 +3,15 @@ package com.hnb.wakabirb;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,19 +19,30 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     SharedPreferences sharedPreferences;
-
     Boolean musicOn;
     Boolean soundEffectsOn;
-    public static final String myPreference = "mypref";
-    public static final String mOnString = "musicOnKey";
-    public static final String seOn = "seOnKey";
+
+    public static final String mOnKey = "musicOnKey";
+    public static final String seOnKey = "seOnKey";
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //Deprecated but in our notes and works compared to other examples I found online
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+
+        musicOn = sharedPreferences.getBoolean(mOnKey,true);
+        soundEffectsOn = sharedPreferences.getBoolean(seOnKey, true);
+
+        System.out.println("*****************************Shared Preferences stuff*****************************************");
+        System.out.println("##########is music enabled: " + musicOn);
+        System.out.println("##########is sound effects enabled: " + soundEffectsOn);
+
         Toolbar myToolbar = findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
+        getSupportActionBar().setTitle(null);
 
 
         EditText userName = findViewById(R.id.EditUsrName);
@@ -62,13 +74,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        sharedPreferences = getSharedPreferences(myPreference, Context.MODE_PRIVATE);
-        if (sharedPreferences.contains(mOnString)){
-            musicOn = sharedPreferences.getBoolean(mOnString, true);    //get value set by user, else set musicOn to true
-        }
-        if ( sharedPreferences.contains(seOn)){
-            soundEffectsOn = sharedPreferences.getBoolean(seOn, true);  //get value set by user, else set soundEffectsOn to true
-        }
+
+            if(musicOn){
+                //TODO: start background music
+
+            }
+
+            if(soundEffectsOn){
+                //TODO: start sound effects?? maybe here maybe not....
+            }
+
 
     }
 
@@ -81,5 +96,25 @@ public class MainActivity extends AppCompatActivity {
     public void onClickStartGame(View button){
         Intent gameIntent = new Intent(this, GameActivity.class);
         startActivity(gameIntent);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem menuItem){
+        int id = menuItem.getItemId();
+
+        if(id == R.id.menu_settings){
+            Intent settingsIntent = new Intent(this, SettingsActivity.class);
+            startActivity(settingsIntent);
+        }
+        return true;
+    }
+
+    @Override
+    protected void onPause(){
+        super.onPause();
+        SharedPreferences.Editor preferencesEditor = sharedPreferences.edit();
+        preferencesEditor.putBoolean(mOnKey, musicOn);
+        preferencesEditor.putBoolean(seOnKey, soundEffectsOn);
+        preferencesEditor.apply();  //apply saves async whereas commit saves sync
     }
 }
