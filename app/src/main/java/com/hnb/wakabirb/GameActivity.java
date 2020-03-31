@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
+import android.widget.TextView;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -15,16 +17,22 @@ public class GameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
-        // RUNS GAME ACTIVITY FOR A SET PERIOD OF TIME THEN AUTOMATICALLY TRANSITIONS INTO RESULTS ACTIVITY
-        new Timer().schedule(new TimerTask(){
-            public void run() {
-                GameActivity.this.runOnUiThread(new Runnable() {
-                    public void run() {
-                        startActivity(new Intent(GameActivity.this, ResultsActivity.class));
-                    }
-                });
+        TextView score = findViewById(R.id.score);
+        final TextView time = findViewById(R.id.time);
+        final int[] counter = {10};
+
+        CountDownTimer timer = new CountDownTimer(10000, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                time.setText(String.valueOf(counter[0]));
+                counter[0]--;
             }
-        }, 10000);
+
+            @Override
+            public void onFinish() {
+                startActivity(new Intent(GameActivity.this, ResultsActivity.class));
+            }
+        }.start();
     }
 
 

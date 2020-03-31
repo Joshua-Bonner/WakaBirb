@@ -7,6 +7,337 @@
     android:background="@drawable/background"
     tools:context=".GameActivity">
 
+    <ImageButton
+        android:id="@+id/birbNest23"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:background="@null"
+        android:clickable="false"
+        android:scaleType="fitCenter"
+        app:layout_constraintStart_toEndOf="@+id/birbNest1"
+        app:layout_constraintTop_toBottomOf="@+id/birbNest22"
+        app:srcCompat="@drawable/birb_nest" />
+
+    <ImageButton
+        android:id="@+id/birbNest17"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="24dp"
+        android:background="@null"
+        android:clickable="false"
+        android:scaleType="fitCenter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.444"
+        app:layout_constraintStart_toEndOf="@+id/birbNest3"
+        app:layout_constraintTop_toBottomOf="@+id/birbNest20"
+        app:srcCompat="@drawable/birb_nest" />
+
+    <ImageButton
+        android:id="@+id/birbNest18"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:background="@null"
+        android:clickable="false"
+        android:scaleType="fitCenter"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/birbNest19"
+        app:srcCompat="@drawable/birb_nest" />
+
+    <ImageButton
+        android:id="@+id/birbNest19"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:background="@null"
+        android:clickable="false"
+        android:scaleType="fitCenter"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/birbNest11"
+        app:srcCompat="@drawable/birb_nest" />
+
+    <ImageButton
+        android:id="@+id/birbNest20"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="24dp"
+        android:background="@null"
+        android:clickable="false"
+        android:scaleType="fitCenter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.444"
+        app:layout_constraintStart_toEndOf="@+id/birbNest3"
+        app:layout_constraintTop_toBottomOf="@+id/birbNest9"
+        app:srcCompat="@drawable/birb_nest" />
+
+    <ImageButton
+        android:id="@+id/birbNest21"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:background="@null"
+        android:clickable="false"
+        android:scaleType="fitCenter"
+        app:layout_constraintStart_toEndOf="@+id/birbNest2"
+        app:layout_constraintTop_toBottomOf="@+id/birbNest10"
+        app:srcCompat="@drawable/birb_nest" />
+
+    <ImageButton
+        android:id="@+id/birbNest22"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:background="@null"
+        android:clickable="false"
+        android:scaleType="fitCenter"
+        app:layout_constraintStart_toEndOf="@+id/birbNest1"
+        app:layout_constraintTop_toBottomOf="@+id/birbNest14"
+        app:srcCompat="@drawable/birb_nest" />
+
+    <ImageButton
+        android:id="@+id/birbNest24"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:background="@null"
+        android:clickable="false"
+        android:scaleType="fitCenter"
+        app:layout_constraintStart_toEndOf="@+id/birbNest2"
+        app:layout_constraintTop_toBottomOf="@+id/birbNest21"
+        app:srcCompat="@drawable/birb_nest" />
+
+    <ImageButton
+        android:id="@+id/birbNest14"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:background="@null"
+        android:clickable="false"
+        android:scaleType="fitCenter"
+        app:layout_constraintStart_toEndOf="@+id/birbNest1"
+        app:layout_constraintTop_toBottomOf="@+id/birbNest15"
+        app:srcCompat="@drawable/birb_nest" />
+
+    <ImageButton
+        android:id="@+id/birbNest9"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="24dp"
+        android:background="@null"
+        android:clickable="false"
+        android:scaleType="fitCenter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.444"
+        app:layout_constraintStart_toEndOf="@+id/birbNest3"
+        app:layout_constraintTop_toBottomOf="@+id/birbNest12"
+        app:srcCompat="@drawable/birb_nest" />
+
+    <ImageButton
+        android:id="@+id/birbNest10"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:background="@null"
+        android:clickable="false"
+        android:scaleType="fitCenter"
+        app:layout_constraintStart_toEndOf="@+id/birbNest2"
+        app:layout_constraintTop_toBottomOf="@+id/birbNest13"
+        app:srcCompat="@drawable/birb_nest" />
+
+    <ImageButton
+        android:id="@+id/birbNest11"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:background="@null"
+        android:clickable="false"
+        android:scaleType="fitCenter"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/birbNest16"
+        app:srcCompat="@drawable/birb_nest" />
+
+    <ImageButton
+        android:id="@+id/birbNest12"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="24dp"
+        android:background="@null"
+        android:clickable="false"
+        android:scaleType="fitCenter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.444"
+        app:layout_constraintStart_toEndOf="@+id/birbNest3"
+        app:layout_constraintTop_toBottomOf="@+id/birbNest5"
+        app:srcCompat="@drawable/birb_nest" />
+
+    <ImageButton
+        android:id="@+id/birbNest13"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:background="@null"
+        android:clickable="false"
+        android:scaleType="fitCenter"
+        app:layout_constraintStart_toEndOf="@+id/birbNest2"
+        app:layout_constraintTop_toBottomOf="@+id/birbNest7"
+        app:srcCompat="@drawable/birb_nest" />
+
+    <ImageButton
+        android:id="@+id/birbNest16"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:background="@null"
+        android:clickable="false"
+        android:scaleType="fitCenter"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/birbNest6"
+        app:srcCompat="@drawable/birb_nest" />
+
+    <ImageButton
+        android:id="@+id/birbNest15"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:background="@null"
+        android:clickable="false"
+        android:scaleType="fitCenter"
+        app:layout_constraintStart_toEndOf="@+id/birbNest1"
+        app:layout_constraintTop_toBottomOf="@+id/birbNest8"
+        app:srcCompat="@drawable/birb_nest" />
+
+    <ImageButton
+        android:id="@+id/birbNest8"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:background="@null"
+        android:clickable="false"
+        android:scaleType="fitCenter"
+        app:layout_constraintStart_toEndOf="@+id/birbNest1"
+        app:layout_constraintTop_toBottomOf="@+id/birbNest2"
+        app:srcCompat="@drawable/birb_nest" />
+
+    <ImageButton
+        android:id="@+id/birbNest5"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="24dp"
+        android:background="@null"
+        android:clickable="false"
+        android:scaleType="fitCenter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.444"
+        app:layout_constraintStart_toEndOf="@+id/birbNest3"
+        app:layout_constraintTop_toBottomOf="@+id/birbNest4"
+        app:srcCompat="@drawable/birb_nest" />
+
+    <ImageButton
+        android:id="@+id/birbNest6"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:background="@null"
+        android:clickable="false"
+        android:scaleType="fitCenter"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/birbNest1"
+        app:srcCompat="@drawable/birb_nest" />
+
+    <ImageButton
+        android:id="@+id/birbNest7"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:background="@null"
+        android:clickable="false"
+        android:scaleType="fitCenter"
+        app:layout_constraintStart_toEndOf="@+id/birbNest2"
+        app:layout_constraintTop_toBottomOf="@+id/birbNest3"
+        app:srcCompat="@drawable/birb_nest" />
+
+    <ImageButton
+        android:id="@+id/birbNest4"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="24dp"
+        android:background="@null"
+        android:clickable="false"
+        android:scaleType="fitCenter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/birbNest3"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/birb_nest" />
+
+    <ImageButton
+        android:id="@+id/birbNest3"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:background="@null"
+        android:clickable="false"
+        android:scaleType="fitCenter"
+        app:layout_constraintStart_toEndOf="@+id/birbNest2"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/birb_nest" />
+
+    <ImageButton
+        android:id="@+id/birbNest1"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:adjustViewBounds="false"
+        android:background="@null"
+        android:clickable="false"
+        android:cropToPadding="false"
+        android:scaleType="fitCenter"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/birb_nest" />
+
+    <ImageButton
+        android:id="@+id/birbNest2"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:background="@null"
+        android:clickable="false"
+        android:scaleType="fitCenter"
+        app:layout_constraintStart_toEndOf="@+id/birbNest1"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/birb_nest" />
+
     <ImageView
         android:id="@+id/bottomBar"
         android:layout_width="0dp"
@@ -25,32 +356,42 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="24dp"
         android:text="Score: "
         android:textColor="#0F2FDD"
         android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@id/bottomBar"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/bottomBar" />
+        app:layout_constraintTop_toTopOf="@+id/bottomBar"
+        app:layout_constraintVertical_bias="0.372" />
 
     <TextView
         android:id="@+id/Timer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="16dp"
+        android:layout_marginBottom="24dp"
         android:text="Time: "
         android:textColor="#2235B3"
         android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@id/bottomBar"
-        app:layout_constraintEnd_toStartOf="@+id/textView2"
-        app:layout_constraintTop_toTopOf="@+id/bottomBar" />
+        app:layout_constraintEnd_toStartOf="@+id/time"
+        app:layout_constraintStart_toEndOf="@+id/score"
+        app:layout_constraintTop_toTopOf="@+id/bottomBar"
+        app:layout_constraintVertical_bias="0.508" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/score"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="24dp"
         android:text="0"
         android:textColor="#23C02D"
         android:textSize="30sp"
@@ -60,16 +401,20 @@
         app:layout_constraintTop_toTopOf="@+id/bottomBar" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="16dp"
+        android:layout_marginBottom="24dp"
         android:text="60"
         android:textColor="#F44336"
         android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/bottomBar"
+        app:layout_constraintStart_toEndOf="@+id/Timer"
         app:layout_constraintTop_toTopOf="@+id/bottomBar" />
 
 
