@@ -5,6 +5,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.text.Editable;
@@ -24,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
 
     public static final String mOnKey = "musicOnKey";
     public static final String seOnKey = "seOnKey";
+
+    MediaPlayer backgroundMusic;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -74,17 +77,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
             if(musicOn){
-                //TODO: start background music
-
+                backgroundMusic = new MediaPlayer();
+                backgroundMusic = MediaPlayer.create(this, R.raw.legrandchase);
+                backgroundMusic.setLooping(true);
+                backgroundMusic.start();
             }
 
             if(soundEffectsOn){
                 //TODO: start sound effects?? maybe here maybe not....
             }
-
-
     }
 
     @Override
@@ -95,6 +97,9 @@ public class MainActivity extends AppCompatActivity {
 
     public void onClickStartGame(View button){
         Intent gameIntent = new Intent(this, GameActivity.class);
+        if(backgroundMusic != null){
+            backgroundMusic.stop();
+        }
         startActivity(gameIntent);
     }
 
