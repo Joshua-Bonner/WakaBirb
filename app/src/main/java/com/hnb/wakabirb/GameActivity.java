@@ -78,15 +78,14 @@ public class GameActivity extends AppCompatActivity {
     }
 
     public void onBirbWhacked(View imageButton){
+        ImageButton whackedBirb = (ImageButton)imageButton;
         int birbNestId = getResources().getIdentifier((String)imageButton.getTag(), "id", getPackageName());
         TextView score = (TextView) findViewById(birbNestId);
         int count = Integer.parseInt((String) score.getText());
         count++;
         String value = Integer.toString(count);
         score.setText(value);
+        whackedBirb.setImageResource(R.drawable.birb_nest);
+        whackedBirb.setClickable(false);
     }
-
-
-
-
 }
