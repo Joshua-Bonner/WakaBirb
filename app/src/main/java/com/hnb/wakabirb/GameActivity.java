@@ -45,12 +45,15 @@ public class GameActivity extends AppCompatActivity {
 
             @Override
             public void onFinish() {
-                backgroundMusic.stop();
+                if(backgroundMusic != null && backgroundMusic.isPlaying()){
+                    backgroundMusic.stop();
+                }
+
                 startActivity(new Intent(GameActivity.this, ResultsActivity.class));
             }
         }.start();
 
-        if(musicOn){
+        if(musicOn && backgroundMusic == null){
             backgroundMusic = new MediaPlayer();
             backgroundMusic = MediaPlayer.create(this, R.raw.legrandchase);
             backgroundMusic.start();

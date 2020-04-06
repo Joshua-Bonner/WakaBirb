@@ -27,12 +27,11 @@ public class ResultsActivity extends AppCompatActivity {
         musicOn = sharedPreferences.getBoolean(mOnKey,true);
         soundEffectsOn = sharedPreferences.getBoolean(seOnKey, true);
 
-        if(musicOn){
+        if(musicOn && backgroundMusic == null){
             backgroundMusic = new MediaPlayer();
             backgroundMusic = MediaPlayer.create(this, R.raw.legrandchase);
             backgroundMusic.start();
             backgroundMusic.setLooping(true);
-
         }
     }
 }

@@ -5,7 +5,11 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.AudioAttributes;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
+import android.media.SoundPool;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.text.Editable;
@@ -38,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
 
         musicOn = sharedPreferences.getBoolean(mOnKey,true);
         soundEffectsOn = sharedPreferences.getBoolean(seOnKey, true);
+        sharedPreferences.registerOnSharedPreferenceChangeListener(sharedPreferenceChangeListener);
 
         System.out.println("*****************************Shared Preferences stuff*****************************************");
         System.out.println("##########is music enabled: " + musicOn);
@@ -88,6 +93,25 @@ public class MainActivity extends AppCompatActivity {
                 //TODO: start sound effects?? maybe here maybe not....
             }
     }
+
+    SharedPreferences.OnSharedPreferenceChangeListener sharedPreferenceChangeListener = new SharedPreferences.OnSharedPreferenceChangeListener() {
+        @Override
+        public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+            if(key.equals("musicOnKey")){
+                musicOn = !musicOn;
+                if(musicOn){
+                        backgroundMusic = new MediaPlayer();
+                        backgroundMusic = MediaPlayer.create(MainActivity.this, R.raw.legrandchase);
+                        backgroundMusic.setLooping(true);
+                        backgroundMusic.start();
+                } else {
+                    if(backgroundMusic.isPlaying()){
+                        backgroundMusic.stop();
+                    }
+                }
+            }
+        }
+    };
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
