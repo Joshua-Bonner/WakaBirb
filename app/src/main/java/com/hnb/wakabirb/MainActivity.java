@@ -1,5 +1,7 @@
 package com.hnb.wakabirb;
 
+import android.app.AlertDialog;
+import android.util.Log;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -21,16 +23,22 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.*;
+import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.tasks.Task;
 
 public class MainActivity extends AppCompatActivity {
     SharedPreferences sharedPreferences;
     Boolean musicOn;
     Boolean soundEffectsOn;
-
+    private GoogleSignInClient signInClient;
     public static final String mOnKey = "musicOnKey";
     public static final String seOnKey = "seOnKey";
 
     MediaPlayer backgroundMusic;
+
+    private static final int RC_SIGN_IN = 9001;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -39,6 +47,11 @@ public class MainActivity extends AppCompatActivity {
 
         //Deprecated but in our notes and works compared to other examples I found online
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+
+        //sign in to google play games
+        signInClient = GoogleSignIn.getClient(this,
+                new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_GAMES_SIGN_IN).build());
+
 
         musicOn = sharedPreferences.getBoolean(mOnKey,true);
         soundEffectsOn = sharedPreferences.getBoolean(seOnKey, true);
@@ -127,6 +140,10 @@ public class MainActivity extends AppCompatActivity {
         startActivity(gameIntent);
     }
 
+    public void playGamesSignIn(View Button) {
+       startActivityForResult(signInClient.getSignInIntent(), RC_SIGN_IN);
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem menuItem){
         int id = menuItem.getItemId();
@@ -145,5 +162,24 @@ public class MainActivity extends AppCompatActivity {
         preferencesEditor.putBoolean(mOnKey, musicOn);
         preferencesEditor.putBoolean(seOnKey, soundEffectsOn);
         preferencesEditor.apply();  //apply saves async whereas commit saves sync
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        super.onActivityResult(requestCode, resultCode, intent);
+        if (requestCode == RC_SIGN_IN) {
+            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(intent);
+            if (result.isSuccess()) {
+                // The signed in account is stored in the result.
+                GoogleSignInAccount signedInAccount = result.getSignInAccount();
+            } else {
+                String message = result.getStatus().getStatusMessage();
+                if (message == null || message.isEmpty()) {
+                    message = "Unknown Error";
+                }
+                new AlertDialog.Builder(this).setMessage(message)
+                        .setNeutralButton(android.R.string.ok, null).show();
+            }
+        }
     }
 }

@@ -24,6 +24,7 @@ public class GameActivity extends AppCompatActivity {
     public static final String mOnKey = "musicOnKey";
     public static final String seOnKey = "seOnKey";
     MediaPlayer backgroundMusic;
+    int gameScore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,11 +60,15 @@ public class GameActivity extends AppCompatActivity {
 
             @Override
             public void onFinish() {
+                //TODO fix merge conflict
                 if(backgroundMusic != null && backgroundMusic.isPlaying()){
                     backgroundMusic.stop();
                 }
+                Intent resultIntent = new Intent(GameActivity.this, ResultsActivity.class);
+                resultIntent.putExtra("score", gameScore);
+                startActivity(resultIntent);
+                backgroundMusic.stop();
 
-                startActivity(new Intent(GameActivity.this, ResultsActivity.class));
             }
         }.start();
 
