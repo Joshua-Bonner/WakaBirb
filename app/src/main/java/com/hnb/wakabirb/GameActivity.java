@@ -25,6 +25,7 @@ public class GameActivity extends AppCompatActivity {
     public static final String seOnKey = "seOnKey";
     MediaPlayer backgroundMusic;
     int gameScore;
+    int birbIndex;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +51,11 @@ public class GameActivity extends AppCompatActivity {
         CountDownTimer timer = new CountDownTimer(10000, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
+                ImageButton birbNotWhacked = birbNests[birbIndex];
+                birbNotWhacked.setClickable(false);
+                birbNotWhacked.setImageResource(R.drawable.birb_nest);
                 int rand = new Random().nextInt(23);
+                birbIndex = rand;
                 ImageButton whackDatBirb = birbNests[rand];
                 whackDatBirb.setImageResource(R.drawable.birb);
                 whackDatBirb.setClickable(true);
@@ -88,6 +93,7 @@ public class GameActivity extends AppCompatActivity {
         TextView score = (TextView) findViewById(birbNestId);
         int count = Integer.parseInt((String) score.getText());
         count++;
+        gameScore = count;
         String value = Integer.toString(count);
         score.setText(value);
         whackedBirb.setImageResource(R.drawable.birb_nest);
