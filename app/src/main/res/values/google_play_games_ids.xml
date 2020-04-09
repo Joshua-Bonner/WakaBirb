@@ -5,7 +5,9 @@ Save this file as res/values/games-ids.xml in your project.
 -->
 <resources>
     <!-- app_id -->
-    <string name="app_id" translatable="false">536490788565</string>
+    <string name="app_id" translatable="false">222062357459</string>
+    <!-- package_name -->
+    <string name="package_name" translatable="false">com.hnb.wakabirb</string>
     <!-- leaderboard Top Scores -->
-    <string name="leaderboard_top_scores" translatable="false">CgkI1Y3fys4PEAIQAA</string>
+    <string name="leaderboard_top_scores" translatable="false">CgkI09fKn7sGEAIQAQ</string>
 </resources>

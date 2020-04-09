@@ -26,6 +26,11 @@ import android.widget.Toast;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.*;
 import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.games.Games;
+import com.google.android.gms.games.LeaderboardsClient;
+import com.google.android.gms.games.Player;
+import com.google.android.gms.games.PlayersClient;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
 public class MainActivity extends AppCompatActivity {
@@ -33,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
     Boolean musicOn;
     Boolean soundEffectsOn;
     private GoogleSignInClient signInClient;
+    private PlayersClient mPlayersClient;
+    private LeaderboardsClient mLeaderboardsClient;
     public static final String mOnKey = "musicOnKey";
     public static final String seOnKey = "seOnKey";
 
@@ -53,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
                 new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_GAMES_SIGN_IN).build());
 
 
-        musicOn = sharedPreferences.getBoolean(mOnKey,true);
+        musicOn = sharedPreferences.getBoolean(mOnKey, true);
         soundEffectsOn = sharedPreferences.getBoolean(seOnKey, true);
         sharedPreferences.registerOnSharedPreferenceChangeListener(sharedPreferenceChangeListener);
 
@@ -79,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence userName, int start, int before, int count) {
-                if(userName.toString().trim().length()==0) {
+                if (userName.toString().trim().length() == 0) {
                     startGameBtn.setEnabled(false);
                     startGameBtn.setVisibility(View.INVISIBLE);
                     Toast.makeText(MainActivity.this, "Text can not be empty", Toast.LENGTH_SHORT).show();
@@ -95,30 +102,30 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-            if(musicOn){
-                backgroundMusic = new MediaPlayer();
-                backgroundMusic = MediaPlayer.create(this, R.raw.legrandchase);
-                backgroundMusic.setLooping(true);
-                backgroundMusic.start();
-            }
+        if (musicOn) {
+            backgroundMusic = new MediaPlayer();
+            backgroundMusic = MediaPlayer.create(this, R.raw.legrandchase);
+            backgroundMusic.setLooping(true);
+            backgroundMusic.start();
+        }
 
-            if(soundEffectsOn){
-                //TODO: start sound effects?? maybe here maybe not....
-            }
+        if (soundEffectsOn) {
+            //TODO: start sound effects?? maybe here maybe not....
+        }
     }
 
     SharedPreferences.OnSharedPreferenceChangeListener sharedPreferenceChangeListener = new SharedPreferences.OnSharedPreferenceChangeListener() {
         @Override
         public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-            if(key.equals("musicOnKey")){
+            if (key.equals("musicOnKey")) {
                 musicOn = !musicOn;
-                if(musicOn){
-                        backgroundMusic = new MediaPlayer();
-                        backgroundMusic = MediaPlayer.create(MainActivity.this, R.raw.legrandchase);
-                        backgroundMusic.setLooping(true);
-                        backgroundMusic.start();
+                if (musicOn) {
+                    backgroundMusic = new MediaPlayer();
+                    backgroundMusic = MediaPlayer.create(MainActivity.this, R.raw.legrandchase);
+                    backgroundMusic.setLooping(true);
+                    backgroundMusic.start();
                 } else {
-                    if(backgroundMusic.isPlaying()){
+                    if (backgroundMusic.isPlaying()) {
                         backgroundMusic.stop();
                     }
                 }
@@ -127,28 +134,28 @@ public class MainActivity extends AppCompatActivity {
     };
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu){
+    public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
-    public void onClickStartGame(View button){
+    public void onClickStartGame(View button) {
         Intent gameIntent = new Intent(this, GameActivity.class);
-        if(backgroundMusic != null){
+        if (backgroundMusic != null) {
             backgroundMusic.stop();
         }
         startActivity(gameIntent);
     }
 
     public void playGamesSignIn(View Button) {
-       startActivityForResult(signInClient.getSignInIntent(), RC_SIGN_IN);
+        startActivityForResult(signInClient.getSignInIntent(), RC_SIGN_IN);
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem menuItem){
+    public boolean onOptionsItemSelected(MenuItem menuItem) {
         int id = menuItem.getItemId();
 
-        if(id == R.id.menu_settings){
+        if (id == R.id.menu_settings) {
             Intent settingsIntent = new Intent(this, SettingsActivity.class);
             startActivity(settingsIntent);
         }
@@ -156,7 +163,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onPause(){
+    protected void onPause() {
         super.onPause();
         SharedPreferences.Editor preferencesEditor = sharedPreferences.edit();
         preferencesEditor.putBoolean(mOnKey, musicOn);
@@ -168,18 +175,55 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
         super.onActivityResult(requestCode, resultCode, intent);
         if (requestCode == RC_SIGN_IN) {
-            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(intent);
-            if (result.isSuccess()) {
-                // The signed in account is stored in the result.
-                GoogleSignInAccount signedInAccount = result.getSignInAccount();
-            } else {
-                String message = result.getStatus().getStatusMessage();
+            Task<GoogleSignInAccount> task =
+                    GoogleSignIn.getSignedInAccountFromIntent(intent);
+
+            try {
+                GoogleSignInAccount account = task.getResult(ApiException.class);
+                onConnected(account);
+            } catch (ApiException apiException) {
+                String message = apiException.getMessage();
                 if (message == null || message.isEmpty()) {
-                    message = "Unknown Error";
+                    //message = getString(R.string.signin_other_error);
                 }
-                new AlertDialog.Builder(this).setMessage(message)
-                        .setNeutralButton(android.R.string.ok, null).show();
+
+                //onDisconnected();
+
+                new AlertDialog.Builder(this)
+                        .setMessage(message)
+                        .setNeutralButton(android.R.string.ok, null)
+                        .show();
             }
         }
+    }
+
+    private void onConnected(GoogleSignInAccount googleSignInAccount) {
+        Log.d("Wakabirb", "onConnected(): connected to Google APIs");
+
+        mLeaderboardsClient = Games.getLeaderboardsClient(this, googleSignInAccount);
+        mPlayersClient = Games.getPlayersClient(this, googleSignInAccount);
+
+        // Show sign-out button on main menu
+        //mMainMenuFragment.setShowSignInButton(false);
+
+        // Show "you are signed in" message on win screen, with no sign in button.
+        //mWinFragment.setShowSignInButton(false);
+
+        // Set the greeting appropriately on main menu
+        mPlayersClient.getCurrentPlayer()
+                .addOnCompleteListener(new OnCompleteListener<Player>() {
+                    @Override
+                    public void onComplete(Task<Player> task) {
+                        String displayName;
+                        if (task.isSuccessful()) {
+                            displayName = task.getResult().getDisplayName();
+                        } else {
+                            Exception e = task.getException();
+                            //handleException(e, getString(R.string.players_exception));
+                            displayName = "???";
+                        }
+                        //mMainMenuFragment.setGreeting("Hello, " + displayName);
+                    }
+                });
     }
 }
