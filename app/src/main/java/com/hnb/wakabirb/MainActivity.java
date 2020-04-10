@@ -64,9 +64,9 @@ public class MainActivity extends AppCompatActivity {
         soundEffectsOn = sharedPreferences.getBoolean(seOnKey, true);
         sharedPreferences.registerOnSharedPreferenceChangeListener(sharedPreferenceChangeListener);
 
-        System.out.println("*****************************Shared Preferences stuff*****************************************");
-        System.out.println("##########is music enabled: " + musicOn);
-        System.out.println("##########is sound effects enabled: " + soundEffectsOn);
+//        System.out.println("*****************************Shared Preferences stuff*****************************************");
+//        System.out.println("##########is music enabled: " + musicOn);
+//        System.out.println("##########is sound effects enabled: " + soundEffectsOn);
 
         Toolbar myToolbar = findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
@@ -199,17 +199,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void onConnected(GoogleSignInAccount googleSignInAccount) {
         Log.d("Wakabirb", "onConnected(): connected to Google APIs");
-
         mLeaderboardsClient = Games.getLeaderboardsClient(this, googleSignInAccount);
         mPlayersClient = Games.getPlayersClient(this, googleSignInAccount);
-
-        // Show sign-out button on main menu
-        //mMainMenuFragment.setShowSignInButton(false);
-
-        // Show "you are signed in" message on win screen, with no sign in button.
-        //mWinFragment.setShowSignInButton(false);
-
-        // Set the greeting appropriately on main menu
         mPlayersClient.getCurrentPlayer()
                 .addOnCompleteListener(new OnCompleteListener<Player>() {
                     @Override
@@ -217,6 +208,10 @@ public class MainActivity extends AppCompatActivity {
                         String displayName;
                         if (task.isSuccessful()) {
                             displayName = task.getResult().getDisplayName();
+                            EditText usernameBox = findViewById(R.id.EditUsrName);
+                            usernameBox.setText(displayName);
+                            usernameBox.setEnabled(false);
+                            Log.d("Wakabirb-AndroidLogin", displayName);
                         } else {
                             Exception e = task.getException();
                             //handleException(e, getString(R.string.players_exception));
@@ -225,5 +220,9 @@ public class MainActivity extends AppCompatActivity {
                         //mMainMenuFragment.setGreeting("Hello, " + displayName);
                     }
                 });
+    }
+
+    private void onDisconnected() {
+
     }
 }

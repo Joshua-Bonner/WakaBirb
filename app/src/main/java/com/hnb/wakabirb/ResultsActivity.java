@@ -1,5 +1,6 @@
 package com.hnb.wakabirb;
 
+import android.content.Intent;
 import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,6 +18,7 @@ import com.google.android.gms.games.Games;
 import com.google.android.gms.games.LeaderboardsClient;
 import com.google.android.gms.games.PlayersClient;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 
 public class ResultsActivity extends AppCompatActivity {
@@ -30,6 +32,7 @@ public class ResultsActivity extends AppCompatActivity {
 
     public static final String mOnKey = "musicOnKey";
     public static final String seOnKey = "seOnKey";
+    private static final int RC_LEADERBOARD_UI = 9004;
 
     MediaPlayer backgroundMusic;
 
@@ -78,6 +81,18 @@ public class ResultsActivity extends AppCompatActivity {
         else { //they're already signed in
             signInAccount = GoogleSignIn.getLastSignedInAccount(this);
         }
-        Games.getLeaderboardsClient(this, signInAccount).submitScore(getString(R.string.leaderboard_top_scores), getIntent().getIntExtra("score", 420));
+        Games.getLeaderboardsClient(this, signInAccount).submitScore(getString(R.string.leaderboard_top_scores), getIntent().getIntExtra("score", 0));
+        showLeaderboard();
+    }
+
+    private void showLeaderboard() {
+        Games.getLeaderboardsClient(this, GoogleSignIn.getLastSignedInAccount(this))
+                .getLeaderboardIntent(getString(R.string.leaderboard_top_scores))
+                .addOnSuccessListener(new OnSuccessListener<Intent>() {
+                    @Override
+                    public void onSuccess(Intent intent) {
+                        startActivityForResult(intent, RC_LEADERBOARD_UI);
+                    }
+                });
     }
 }
