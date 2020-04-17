@@ -250,5 +250,7 @@ public class MainActivity extends AppCompatActivity {
         usernameBox.setText("");
         usernameBox.setEnabled(true);
         Snackbar.make(constraintLayout, "Successfully signed out.", Snackbar.LENGTH_LONG).show();
+        ((TextView) findViewById(R.id.signInText)).setText("Sign in to Google Play Games to post your scores to the leaderboard");
+        ((Button) findViewById(R.id.g_sign_in)).setText("Google Play Sign In");
     }
 }
