@@ -2,6 +2,8 @@ package com.hnb.wakabirb;
 
 import android.app.AlertDialog;
 import android.util.Log;
+import android.widget.TextView;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -23,6 +25,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.*;
 import com.google.android.gms.common.api.ApiException;
@@ -32,17 +35,21 @@ import com.google.android.gms.games.Player;
 import com.google.android.gms.games.PlayersClient;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.snackbar.Snackbar;
 
 public class MainActivity extends AppCompatActivity {
     SharedPreferences sharedPreferences;
     Boolean musicOn;
     Boolean soundEffectsOn;
+    boolean signedIn = false;
     private GoogleSignInClient signInClient;
     private PlayersClient mPlayersClient;
     private LeaderboardsClient mLeaderboardsClient;
     public static final String mOnKey = "musicOnKey";
     public static final String seOnKey = "seOnKey";
+    public static final String TAG = "WakBirb";
 
+    ConstraintLayout constraintLayout;
     MediaPlayer backgroundMusic;
 
     private static final int RC_SIGN_IN = 9001;
@@ -52,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        constraintLayout = findViewById(R.id.mainConstraintLayout);
         //Deprecated but in our notes and works compared to other examples I found online
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
@@ -148,7 +156,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void playGamesSignIn(View Button) {
-        startActivityForResult(signInClient.getSignInIntent(), RC_SIGN_IN);
+        if (signedIn) {
+            playGamesSignOut();
+        } else {
+            startActivityForResult(signInClient.getSignInIntent(), RC_SIGN_IN);
+        }
     }
 
     @Override
@@ -187,7 +199,7 @@ public class MainActivity extends AppCompatActivity {
                     //message = getString(R.string.signin_other_error);
                 }
 
-                //onDisconnected();
+                onDisconnected();
 
                 new AlertDialog.Builder(this)
                         .setMessage(message)
@@ -197,8 +209,20 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    private void playGamesSignOut() {
+        signInClient.signOut().addOnCompleteListener(this,
+                new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        Log.d(TAG, "Signing off Google Play");
+                        onDisconnected();
+                        signedIn = false;
+                    }
+                });
+    }
+
     private void onConnected(GoogleSignInAccount googleSignInAccount) {
-        Log.d("Wakabirb", "onConnected(): connected to Google APIs");
+        Log.d(TAG, "onConnected(): connected to Google APIs");
         mLeaderboardsClient = Games.getLeaderboardsClient(this, googleSignInAccount);
         mPlayersClient = Games.getPlayersClient(this, googleSignInAccount);
         mPlayersClient.getCurrentPlayer()
@@ -211,18 +235,20 @@ public class MainActivity extends AppCompatActivity {
                             EditText usernameBox = findViewById(R.id.EditUsrName);
                             usernameBox.setText(displayName);
                             usernameBox.setEnabled(false);
-                            Log.d("Wakabirb-AndroidLogin", displayName);
-                        } else {
-                            Exception e = task.getException();
-                            //handleException(e, getString(R.string.players_exception));
-                            displayName = "???";
+                            Log.d(TAG, "Google Play name: " + displayName);
+                            ((TextView) findViewById(R.id.signInText)).setText("You are signed in to Google Play Games, your scores will be posted to the leaderboards.");
+                            ((Button) findViewById(R.id.g_sign_in)).setText("Sign Out");
+                            signedIn = true;
                         }
-                        //mMainMenuFragment.setGreeting("Hello, " + displayName);
                     }
                 });
+
     }
 
     private void onDisconnected() {
-
+        EditText usernameBox = findViewById(R.id.EditUsrName);
+        usernameBox.setText("");
+        usernameBox.setEnabled(true);
+        Snackbar.make(constraintLayout, "Successfully signed out.", Snackbar.LENGTH_LONG).show();
     }
 }

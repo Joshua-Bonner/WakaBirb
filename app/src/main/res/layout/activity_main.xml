@@ -7,6 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background"
+    android:id="@+id/mainConstraintLayout"
     tools:context=".MainActivity">
 
         <androidx.appcompat.widget.Toolbar
@@ -62,58 +63,61 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/EditUsrName" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/g_sign_in"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/StartButton"
-        android:layout_marginTop="8dp"
-        android:onClick="playGamesSignIn"
-        android:text="Google Play Sign In"
-            />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Sign in to Google Play Games to be able to access the leaderboard."
-        app:layout_constraintTop_toBottomOf="@+id/g_sign_in"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+    <ImageView
+            android:id="@+id/redBirb"
+            android:layout_width="101dp"
+            android:layout_height="97dp"
+            app:layout_constraintBottom_toTopOf="@+id/hairBirb"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.112"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/birb"/>
 
-              />
 
     <ImageView
-        android:id="@+id/redBirb"
-        android:layout_width="101dp"
-        android:layout_height="97dp"
-        android:layout_marginBottom="56dp"
-        app:layout_constraintBottom_toTopOf="@+id/hairBirb"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.112"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/birb" />
-
+            android:id="@+id/hairBirb"
+            android:layout_width="101dp"
+            android:layout_height="97dp"
+            android:layout_marginBottom="160dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.522"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/birb_hair"/>
     <ImageView
-        android:id="@+id/hairBirb"
-        android:layout_width="101dp"
-        android:layout_height="97dp"
-        android:layout_marginBottom="32dp"
+            android:id="@+id/purpleBirb"
+            android:layout_width="101dp"
+            android:layout_height="97dp"
+            app:layout_constraintBottom_toTopOf="@+id/hairBirb"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.938"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/birb_purple"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.561"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/birb_hair" />
+        android:background="#cecece">
+        <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/g_sign_in"
+                android:onClick="playGamesSignIn"
+                android:text="Google Play Sign In"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+        />
 
-    <ImageView
-        android:id="@+id/purpleBirb"
-        android:layout_width="101dp"
-        android:layout_height="97dp"
-        android:layout_marginBottom="32dp"
-        app:layout_constraintBottom_toTopOf="@+id/hairBirb"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.687"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/birb_purple" />
+
+        <TextView
+                android:id="@+id/signInText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Sign in to Google Play Games to post your scores to the leaderboard"/>
+</LinearLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

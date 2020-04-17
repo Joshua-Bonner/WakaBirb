@@ -54,35 +54,12 @@ public class ResultsActivity extends AppCompatActivity {
             backgroundMusic.setLooping(true);
         }
         signInClient = GoogleSignIn.getClient(this, new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_GAMES_SIGN_IN).build()); //sign in to google play games
-        //sign in to your google account
-        //update your leaderboard score
-        GoogleSignInAccount signInAccount = null;
-        if(GoogleSignIn.getLastSignedInAccount(this) == null) {
-            GoogleSignInOptions signInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_GAMES_SIGN_IN).requestEmail().build();
-            GoogleSignInClient signInClient = GoogleSignIn.getClient(this, signInOptions);
-            Task<GoogleSignInAccount> task = signInClient.silentSignIn();
-            if(task.isSuccessful()) {
-                signInAccount = task.getResult();
-            }
-            else {
-                task.addOnCompleteListener(new OnCompleteListener<GoogleSignInAccount>() {
-                    @Override
-                    public void onComplete(@NonNull Task<GoogleSignInAccount> task) {
-                        try {
-                            GoogleSignInAccount account = task.getResult(ApiException.class);
-                        } catch (ApiException ex) {
-                            Log.e("account_sign_in", ex.toString());
-                            Log.e("account_sign_in", "" + ex.getStatusCode());
-                        }
-                    }
-                });
-            }
+        GoogleSignInAccount  signInAccount = GoogleSignIn.getLastSignedInAccount(this);
+
+        if(signInAccount != null) {
+            Games.getLeaderboardsClient(this, signInAccount).submitScore(getString(R.string.leaderboard_top_scores), getIntent().getIntExtra("score", 0));
+            showLeaderboard();
         }
-        else { //they're already signed in
-            signInAccount = GoogleSignIn.getLastSignedInAccount(this);
-        }
-        Games.getLeaderboardsClient(this, signInAccount).submitScore(getString(R.string.leaderboard_top_scores), getIntent().getIntExtra("score", 0));
-        showLeaderboard();
     }
 
     private void showLeaderboard() {
