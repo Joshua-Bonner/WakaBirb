@@ -28,7 +28,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="80dp"
         android:padding="12dp"
-        android:text="WAKA BIRB"
+        android:text="@string/waka_birb"
         android:textSize="28sp"
         android:textColor="#F00"
         app:fontName="Jelly Crazies.ttf"
@@ -41,7 +41,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:hint="Enter your user name"
+        android:hint="@string/enter_your_user_name"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -55,7 +55,7 @@
         android:background="#4CAF50"
         android:enabled="false"
         android:onClick="onClickStartGame"
-        android:text="Start Game"
+        android:text="@string/start_game"
         android:textColor="#030FF4"
         android:textStyle="bold"
         android:visibility="invisible"
@@ -93,31 +93,33 @@
             app:layout_constraintHorizontal_bias="0.938"
             app:layout_constraintStart_toStartOf="parent"
             app:srcCompat="@drawable/birb_purple"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="120dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:background="#cecece">
+        android:background="#689F38"
+        app:layout_constraintBottom_toBottomOf="parent">
+
         <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/g_sign_in"
-                android:onClick="playGamesSignIn"
-                android:text="Google Play Sign In"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="16dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
-        />
+            android:id="@+id/g_sign_in"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:onClick="playGamesSignIn"
+            android:text="@string/google_play_sign_in" />
 
 
         <TextView
-                android:id="@+id/signInText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Sign in to Google Play Games to post your scores to the leaderboard"/>
-</LinearLayout>
+            android:id="@+id/signInText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/sign_in_to_google_play_games_to_post_your_scores_to_the_leaderboard"
+            android:textColor="@color/colorPrimaryDark" />
+    </LinearLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

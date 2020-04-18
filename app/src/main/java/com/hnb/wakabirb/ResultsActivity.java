@@ -9,6 +9,10 @@ import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
+
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -21,7 +25,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 
-import com.hnb.wakabirb.MainActivity;
+import static com.hnb.wakabirb.MainActivity.backgroundMusic;
 
 public class ResultsActivity extends AppCompatActivity {
 
@@ -41,13 +45,17 @@ public class ResultsActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_results);
+        Intent intent = getIntent();
+        int gameScore = intent.getIntExtra("score", 0);
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-
         musicOn = sharedPreferences.getBoolean(mOnKey,true);
         soundEffectsOn = sharedPreferences.getBoolean(seOnKey, true);
 
-        MainActivity.backgroundMusic.setVolume(0.50f,0.50f);
+        if(musicOn){
+            backgroundMusic.setVolume(0.50f,0.50f);
+            backgroundMusic.start();
+        }
 
         signInClient = GoogleSignIn.getClient(this, new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_GAMES_SIGN_IN).build()); //sign in to google play games
         GoogleSignInAccount  signInAccount = GoogleSignIn.getLastSignedInAccount(this);
@@ -56,6 +64,9 @@ public class ResultsActivity extends AppCompatActivity {
             Games.getLeaderboardsClient(this, signInAccount).submitScore(getString(R.string.leaderboard_top_scores), getIntent().getIntExtra("score", 0));
             showLeaderboard();
         }
+
+        TextView et = findViewById(R.id.finalScore);
+        et.setText(String.valueOf(gameScore));
     }
 
     private void showLeaderboard() {
@@ -67,5 +78,33 @@ public class ResultsActivity extends AppCompatActivity {
                         startActivityForResult(intent, RC_LEADERBOARD_UI);
                     }
                 });
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if(backgroundMusic != null){
+            backgroundMusic.pause();
+        }
+    }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+        if(musicOn){
+            backgroundMusic.start();
+        }
+    }
+
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        backgroundMusic.stop();
+    }
+
+    public void onClickPlayAgain(View view) {
+        backgroundMusic.stop();
+        Intent mainIntent = new Intent(this, MainActivity.class);
+        startActivity(mainIntent);
     }
 }

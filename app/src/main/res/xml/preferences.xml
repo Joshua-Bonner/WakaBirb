@@ -16,8 +16,4 @@
             android:defaultValue="true"
             android:key="@string/seOnKey"
             android:title="@string/SoundEffects" />
-
-    <PreferenceCategory
-        android:title = "@string/OtherSettings"/>
-
 </PreferenceScreen>

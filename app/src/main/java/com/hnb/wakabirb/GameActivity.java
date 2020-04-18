@@ -21,8 +21,7 @@ import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import com.hnb.wakabirb.MainActivity;
-
+import static com.hnb.wakabirb.MainActivity.backgroundMusic;
 
 public class GameActivity extends AppCompatActivity {
     SharedPreferences sharedPreferences;
@@ -35,7 +34,7 @@ public class GameActivity extends AppCompatActivity {
     MediaPlayer birbDeath;
     Random birbRand = new Random();
     final int[] birbDeaths = {R.raw.birb_death, R.raw.birb_death1, R.raw.birb_death2};
-    int gameScore;
+    public static int gameScore;
     int birbIndex;
 
     @Override
@@ -44,8 +43,14 @@ public class GameActivity extends AppCompatActivity {
         setContentView(R.layout.activity_game);
         TextView score = findViewById(R.id.score);
 
-        MainActivity.backgroundMusic.start();
-        MainActivity.backgroundMusic.setVolume(0.080f,0.080f);
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        musicOn = sharedPreferences.getBoolean(mOnKey, true);
+        soundEffectsOn = sharedPreferences.getBoolean(seOnKey, true);
+
+        if(musicOn){
+            backgroundMusic.setVolume(0.100f,0.100f);
+            backgroundMusic.start();
+        }
 
         final TextView time = findViewById(R.id.time);
         final int[] counter = {10};
@@ -61,10 +66,6 @@ public class GameActivity extends AppCompatActivity {
                                    (ImageButton)findViewById(R.id.birbNest16),(ImageButton)findViewById(R.id.birbNest17),(ImageButton)findViewById(R.id.birbNest18),
                                    (ImageButton)findViewById(R.id.birbNest19),(ImageButton)findViewById(R.id.birbNest20),(ImageButton)findViewById(R.id.birbNest21),
                                    (ImageButton)findViewById(R.id.birbNest22),(ImageButton)findViewById(R.id.birbNest23),(ImageButton)findViewById(R.id.birbNest24)};
-
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        musicOn = sharedPreferences.getBoolean(mOnKey,true);
-        soundEffectsOn = sharedPreferences.getBoolean(seOnKey, true);
 
         CountDownTimer timer = new CountDownTimer(10000, 1000) {
             @Override
@@ -91,10 +92,35 @@ public class GameActivity extends AppCompatActivity {
         }.start();
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if(backgroundMusic != null){
+            backgroundMusic.pause();
+        }
+    }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+        if(musicOn){
+            backgroundMusic.start();
+        }
+    }
+
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        backgroundMusic.stop();
+    }
+
     public void onBirbWhacked(View imageButton){
-        birbDeath = new MediaPlayer();
-        birbDeath = MediaPlayer.create(this, birbDeaths[birbRand.nextInt(birbDeaths.length)]);
-        birbDeath.start();
+        if(soundEffectsOn){
+            birbDeath = new MediaPlayer();
+            birbDeath = MediaPlayer.create(this, birbDeaths[birbRand.nextInt(birbDeaths.length)]);
+            birbDeath.start();
+        }
+
         ImageButton whackedBirb = (ImageButton)imageButton;
         int birbNestId = getResources().getIdentifier((String)imageButton.getTag(), "id", getPackageName());
         TextView score = (TextView) findViewById(birbNestId);

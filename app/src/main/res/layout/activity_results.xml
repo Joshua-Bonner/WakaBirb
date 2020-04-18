@@ -13,12 +13,38 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="80dp"
         android:padding="12dp"
-        android:text="RESULTS"
-        android:textSize="28sp"
+        android:text="@string/results"
         android:textColor="#F00"
+        android:textSize="28sp"
         app:fontName="Jelly Crazies.ttf"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/playAgain"
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="200dp"
+        android:background="#F57C00"
+        android:text="@string/play_again"
+        android:onClick="onClickPlayAgain"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.48"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/finalScore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:textAlignment="center"
+        android:textColor="#303F9F"
+        android:textSize="36sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Results" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

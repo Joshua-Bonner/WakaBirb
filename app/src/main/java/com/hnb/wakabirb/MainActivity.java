@@ -73,14 +73,9 @@ public class MainActivity extends AppCompatActivity {
         soundEffectsOn = sharedPreferences.getBoolean(seOnKey, true);
         sharedPreferences.registerOnSharedPreferenceChangeListener(sharedPreferenceChangeListener);
 
-//        System.out.println("*****************************Shared Preferences stuff*****************************************");
-//        System.out.println("##########is music enabled: " + musicOn);
-//        System.out.println("##########is sound effects enabled: " + soundEffectsOn);
-
         Toolbar myToolbar = findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
         getSupportActionBar().setTitle(null);
-
 
         EditText userName = findViewById(R.id.EditUsrName);
         final Button startGameBtn = findViewById(R.id.StartButton);
@@ -111,10 +106,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        if(backgroundMusic != null && musicOn){
-            backgroundMusic.start();
-        }
-        if ( musicOn){
+        if (musicOn){
             backgroundMusic = new MediaPlayer();
             backgroundMusic = MediaPlayer.create(this, R.raw.legrandchase);
             backgroundMusic.setLooping(true);
@@ -140,12 +132,11 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
             }
+            if(key.equals("seOnKey")){
+                soundEffectsOn = !soundEffectsOn;
+            }
         }
     };
-
-    public void musicPlay(){
-        backgroundMusic.start();
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -184,13 +175,23 @@ public class MainActivity extends AppCompatActivity {
         preferencesEditor.putBoolean(mOnKey, musicOn);
         preferencesEditor.putBoolean(seOnKey, soundEffectsOn);
         preferencesEditor.apply();  //apply saves async whereas commit saves sync
-        backgroundMusic.pause();
+        if(backgroundMusic != null){
+            backgroundMusic.pause();
+        }
     }
 
     @Override
     protected void onResume(){
         super.onResume();
-        backgroundMusic.start();
+        if(musicOn){
+            backgroundMusic.start();
+        }
+    }
+
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        backgroundMusic.stop();
     }
 
     @Override
