@@ -1,6 +1,7 @@
 package com.hnb.wakabirb;
 
 import android.app.AlertDialog;
+import android.os.Parcelable;
 import android.util.Log;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
@@ -37,6 +38,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
 
+
 public class MainActivity extends AppCompatActivity {
     SharedPreferences sharedPreferences;
     Boolean musicOn;
@@ -50,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
     public static final String TAG = "WakBirb";
 
     ConstraintLayout constraintLayout;
-    MediaPlayer backgroundMusic;
+    public static MediaPlayer backgroundMusic;
 
     private static final int RC_SIGN_IN = 9001;
 
@@ -66,7 +68,6 @@ public class MainActivity extends AppCompatActivity {
         //sign in to google play games
         signInClient = GoogleSignIn.getClient(this,
                 new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_GAMES_SIGN_IN).build());
-
 
         musicOn = sharedPreferences.getBoolean(mOnKey, true);
         soundEffectsOn = sharedPreferences.getBoolean(seOnKey, true);
@@ -110,15 +111,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        if (musicOn) {
+        if(backgroundMusic != null && musicOn){
+            backgroundMusic.start();
+        }
+        if ( musicOn){
             backgroundMusic = new MediaPlayer();
             backgroundMusic = MediaPlayer.create(this, R.raw.legrandchase);
             backgroundMusic.setLooping(true);
+            backgroundMusic.setVolume(0.5f,0.5f);
             backgroundMusic.start();
-        }
-
-        if (soundEffectsOn) {
-            //TODO: start sound effects?? maybe here maybe not....
         }
     }
 
@@ -131,6 +132,7 @@ public class MainActivity extends AppCompatActivity {
                     backgroundMusic = new MediaPlayer();
                     backgroundMusic = MediaPlayer.create(MainActivity.this, R.raw.legrandchase);
                     backgroundMusic.setLooping(true);
+                    backgroundMusic.setVolume(0.5f,0.5f);
                     backgroundMusic.start();
                 } else {
                     if (backgroundMusic.isPlaying()) {
@@ -141,6 +143,10 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
+    public void musicPlay(){
+        backgroundMusic.start();
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
@@ -149,9 +155,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void onClickStartGame(View button) {
         Intent gameIntent = new Intent(this, GameActivity.class);
-        if (backgroundMusic != null) {
-            backgroundMusic.stop();
-        }
         startActivity(gameIntent);
     }
 
@@ -181,6 +184,13 @@ public class MainActivity extends AppCompatActivity {
         preferencesEditor.putBoolean(mOnKey, musicOn);
         preferencesEditor.putBoolean(seOnKey, soundEffectsOn);
         preferencesEditor.apply();  //apply saves async whereas commit saves sync
+        backgroundMusic.pause();
+    }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+        backgroundMusic.start();
     }
 
     @Override

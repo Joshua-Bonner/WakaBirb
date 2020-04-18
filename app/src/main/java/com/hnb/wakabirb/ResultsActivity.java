@@ -21,6 +21,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 
+import com.hnb.wakabirb.MainActivity;
+
 public class ResultsActivity extends AppCompatActivity {
 
 
@@ -34,8 +36,6 @@ public class ResultsActivity extends AppCompatActivity {
     public static final String seOnKey = "seOnKey";
     private static final int RC_LEADERBOARD_UI = 9004;
 
-    MediaPlayer backgroundMusic;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -47,12 +47,8 @@ public class ResultsActivity extends AppCompatActivity {
         musicOn = sharedPreferences.getBoolean(mOnKey,true);
         soundEffectsOn = sharedPreferences.getBoolean(seOnKey, true);
 
-        if(musicOn && backgroundMusic == null){
-            backgroundMusic = new MediaPlayer();
-            backgroundMusic = MediaPlayer.create(this, R.raw.legrandchase);
-            backgroundMusic.start();
-            backgroundMusic.setLooping(true);
-        }
+        MainActivity.backgroundMusic.setVolume(0.50f,0.50f);
+
         signInClient = GoogleSignIn.getClient(this, new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_GAMES_SIGN_IN).build()); //sign in to google play games
         GoogleSignInAccount  signInAccount = GoogleSignIn.getLastSignedInAccount(this);
 

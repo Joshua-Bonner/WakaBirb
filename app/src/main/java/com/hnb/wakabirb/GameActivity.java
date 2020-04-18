@@ -12,6 +12,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.preference.PreferenceManager;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -19,6 +20,8 @@ import android.widget.TextView;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import com.hnb.wakabirb.MainActivity;
 
 
 public class GameActivity extends AppCompatActivity {
@@ -28,7 +31,7 @@ public class GameActivity extends AppCompatActivity {
     Boolean loaded;
     public static final String mOnKey = "musicOnKey";
     public static final String seOnKey = "seOnKey";
-    MediaPlayer backgroundMusic;
+
     MediaPlayer birbDeath;
     Random birbRand = new Random();
     final int[] birbDeaths = {R.raw.birb_death, R.raw.birb_death1, R.raw.birb_death2};
@@ -40,6 +43,10 @@ public class GameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
         TextView score = findViewById(R.id.score);
+
+        MainActivity.backgroundMusic.start();
+        MainActivity.backgroundMusic.setVolume(0.080f,0.080f);
+
         final TextView time = findViewById(R.id.time);
         final int[] counter = {10};
         final int[] birbs = {R.drawable.birb, R.drawable.birb_green, R.drawable.birb_hair,
@@ -77,24 +84,11 @@ public class GameActivity extends AppCompatActivity {
             @Override
             public void onFinish() {
                 //TODO fix merge conflict
-                if(backgroundMusic != null && backgroundMusic.isPlaying()){
-                    backgroundMusic.stop();
-                }
                 Intent resultIntent = new Intent(GameActivity.this, ResultsActivity.class);
                 resultIntent.putExtra("score", gameScore);
                 startActivity(resultIntent);
-                backgroundMusic.stop();
-
             }
         }.start();
-
-        if(musicOn && backgroundMusic == null){
-            backgroundMusic = new MediaPlayer();
-            backgroundMusic = MediaPlayer.create(this, R.raw.legrandchase);
-            backgroundMusic.start();
-            backgroundMusic.setVolume(0.060f,0.060f);
-            backgroundMusic.setLooping(true);
-        }
     }
 
     public void onBirbWhacked(View imageButton){
