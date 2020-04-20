@@ -33,9 +33,10 @@ public class GameActivity extends AppCompatActivity {
 
     MediaPlayer birbDeath;
     Random birbRand = new Random();
-    final int[] birbDeaths = {R.raw.birb_death, R.raw.birb_death1, R.raw.birb_death2};
+    final int[] birbDeaths = {R.raw.birb_death, R.raw.birb_death1, R.raw.birb_death2, R.raw.birb_death3,
+                              R.raw.birb_death4, R.raw.birb_death5, R.raw.birb_death6};
     public static int gameScore;
-    int birbIndex;
+    int birbIndex, birbIndex1, birbIndex2, birbIndex3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,12 +49,12 @@ public class GameActivity extends AppCompatActivity {
         soundEffectsOn = sharedPreferences.getBoolean(seOnKey, true);
 
         if(musicOn){
-            backgroundMusic.setVolume(0.100f,0.100f);
+            backgroundMusic.setVolume(0.25f,0.25f);
             backgroundMusic.start();
         }
 
         final TextView time = findViewById(R.id.time);
-        final int[] counter = {10};
+        final int[] counter = {30};
         final int[] birbs = {R.drawable.birb, R.drawable.birb_green, R.drawable.birb_hair,
                         R.drawable.birb_orange, R.drawable.birb_purple, R.drawable.birb_white,
                         R.drawable.birb_rainbow};
@@ -67,17 +68,45 @@ public class GameActivity extends AppCompatActivity {
                                    (ImageButton)findViewById(R.id.birbNest19),(ImageButton)findViewById(R.id.birbNest20),(ImageButton)findViewById(R.id.birbNest21),
                                    (ImageButton)findViewById(R.id.birbNest22),(ImageButton)findViewById(R.id.birbNest23),(ImageButton)findViewById(R.id.birbNest24)};
 
-        CountDownTimer timer = new CountDownTimer(10000, 1000) {
+        CountDownTimer timer = new CountDownTimer(30000, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
                 ImageButton birbNotWhacked = birbNests[birbIndex];
                 birbNotWhacked.setClickable(false);
                 birbNotWhacked.setImageResource(R.drawable.birb_nest);
-                int rand = new Random().nextInt(23);
+                int rand = new Random().nextInt(birbNests.length);
                 birbIndex = rand;
                 ImageButton whackDatBirb = birbNests[rand];
                 whackDatBirb.setImageResource(birbs[birbRand.nextInt(birbs.length)]);
                 whackDatBirb.setClickable(true);
+
+                ImageButton birbNotWhacked1 = birbNests[birbIndex1];
+                birbNotWhacked1.setClickable(false);
+                birbNotWhacked1.setImageResource(R.drawable.birb_nest);
+                int rand1 = new Random().nextInt(birbNests.length);
+                birbIndex1 = rand1;
+                ImageButton whackDatBirb1 = birbNests[rand1];
+                whackDatBirb1.setImageResource(birbs[birbRand.nextInt(birbs.length)]);
+                whackDatBirb1.setClickable(true);
+
+                ImageButton birbNotWhacked2 = birbNests[birbIndex2];
+                birbNotWhacked2.setClickable(false);
+                birbNotWhacked2.setImageResource(R.drawable.birb_nest);
+                int rand2 = new Random().nextInt(birbNests.length);
+                birbIndex2 = rand2;
+                ImageButton whackDatBirb2 = birbNests[rand2];
+                whackDatBirb2.setImageResource(birbs[birbRand.nextInt(birbs.length)]);
+                whackDatBirb2.setClickable(true);
+
+                ImageButton birbNotWhacked3 = birbNests[birbIndex3];
+                birbNotWhacked3.setClickable(false);
+                birbNotWhacked3.setImageResource(R.drawable.birb_nest);
+                int rand3 = new Random().nextInt(birbNests.length);
+                birbIndex3 = rand3;
+                ImageButton whackDatBirb3 = birbNests[rand3];
+                whackDatBirb3.setImageResource(birbs[birbRand.nextInt(birbs.length)]);
+                whackDatBirb3.setClickable(true);
+
                 time.setText(String.valueOf(counter[0]));
                 counter[0]--;
             }
@@ -120,7 +149,6 @@ public class GameActivity extends AppCompatActivity {
             birbDeath = MediaPlayer.create(this, birbDeaths[birbRand.nextInt(birbDeaths.length)]);
             birbDeath.start();
         }
-
         ImageButton whackedBirb = (ImageButton)imageButton;
         int birbNestId = getResources().getIdentifier((String)imageButton.getTag(), "id", getPackageName());
         TextView score = (TextView) findViewById(birbNestId);

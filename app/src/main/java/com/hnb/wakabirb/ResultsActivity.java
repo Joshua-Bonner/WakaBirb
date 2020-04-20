@@ -65,8 +65,8 @@ public class ResultsActivity extends AppCompatActivity {
             showLeaderboard();
         }
 
-        TextView et = findViewById(R.id.finalScore);
-        et.setText(String.valueOf(gameScore));
+        TextView finalScore = findViewById(R.id.finalScore);
+        finalScore.setText("Score: " + String.valueOf(gameScore));
     }
 
     private void showLeaderboard() {
@@ -103,8 +103,14 @@ public class ResultsActivity extends AppCompatActivity {
     }
 
     public void onClickPlayAgain(View view) {
-        backgroundMusic.stop();
+        backgroundMusic.reset();
         Intent mainIntent = new Intent(this, MainActivity.class);
         startActivity(mainIntent);
+    }
+
+    public void onClickQuitGame(View view) {
+        backgroundMusic.stop();
+        this.finishAffinity();
+        System.exit(0);
     }
 }
