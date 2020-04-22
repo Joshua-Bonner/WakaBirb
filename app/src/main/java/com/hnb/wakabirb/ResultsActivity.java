@@ -49,27 +49,26 @@ public class ResultsActivity extends AppCompatActivity {
         int gameScore = intent.getIntExtra("score", 0);
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        musicOn = sharedPreferences.getBoolean(mOnKey,true);
+        musicOn = sharedPreferences.getBoolean(mOnKey, true);
         soundEffectsOn = sharedPreferences.getBoolean(seOnKey, true);
 
-        if(musicOn){
-            backgroundMusic.setVolume(0.50f,0.50f);
+        if (musicOn) {
+            backgroundMusic.setVolume(0.50f, 0.50f);
             backgroundMusic.start();
         }
 
         signInClient = GoogleSignIn.getClient(this, new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_GAMES_SIGN_IN).build()); //sign in to google play games
-        GoogleSignInAccount  signInAccount = GoogleSignIn.getLastSignedInAccount(this);
+        GoogleSignInAccount signInAccount = GoogleSignIn.getLastSignedInAccount(this);
 
-        if(signInAccount != null) {
+        if (signInAccount != null) {
             Games.getLeaderboardsClient(this, signInAccount).submitScore(getString(R.string.leaderboard_top_scores), getIntent().getIntExtra("score", 0));
-            showLeaderboard();
         }
 
         TextView finalScore = findViewById(R.id.finalScore);
         finalScore.setText("Score: " + String.valueOf(gameScore));
     }
 
-    private void showLeaderboard() {
+    public void showLeaderboard(View view) {
         Games.getLeaderboardsClient(this, GoogleSignIn.getLastSignedInAccount(this))
                 .getLeaderboardIntent(getString(R.string.leaderboard_top_scores))
                 .addOnSuccessListener(new OnSuccessListener<Intent>() {
@@ -83,21 +82,21 @@ public class ResultsActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        if(backgroundMusic != null){
+        if (backgroundMusic != null) {
             backgroundMusic.pause();
         }
     }
 
     @Override
-    protected void onResume(){
+    protected void onResume() {
         super.onResume();
-        if(musicOn){
+        if (musicOn) {
             backgroundMusic.start();
         }
     }
 
     @Override
-    protected void onDestroy(){
+    protected void onDestroy() {
         super.onDestroy();
         backgroundMusic.stop();
     }
