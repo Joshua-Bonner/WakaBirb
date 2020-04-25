@@ -18,4 +18,41 @@
     <string name="start_game">Start Game</string>
     <string name="google_play_sign_in">Google Play Sign In</string>
     <string name="sign_in_to_google_play_games_to_post_your_scores_to_the_leaderboard">Sign in to Google Play Games to post your scores to the leaderboard</string>
+    <string name="coming_soon">Coming Soon!</string>
+    <string name="waka_birb_shirt">Waka_birb_shirt</string>
+    <string name="waka_birb_merchanise">Waka Birb Merchanise</string>
+    <string name="birb_history">Birb History</string>
+    <string name="purple_birb">Purple Birb</string>
+    <string name="red_birb">Red Birb</string>
+    <string name="Click">Click</string>
+    <string name="white_waka_birb_t_shirt">white waka birb t-shirt</string>
+    <string name="waka_birb_apparel">Waka Birb Apparel</string>
+    <string name="also_by_hnb_enterprise">Also by HnB Enterprise:</string>
+    <string name="like_birbs">Like Birbs</string>
+    <string name="history">Birb History</string>
+    <string name="historyWriteUp">
+        A long time ago, in a land far far away, a group of computer programmers were working on a project.
+        This project involved a system for feeding birds.
+        There were many birds wanting to be fed but only 5 birds could be inside the feeding area at time.
+        Therefore the programmers had to device a mechanism that would allow the birds to notify the feeding area that they were hungry.
+        \n \n
+        While working on this mechanism, many problems came about.
+        Sometimes too many birds would get into the feeding area.
+        Sometimes the birds would not leave the feeding area.
+        Sometimes the birds would leave the feeding area, but not indicate they had left.
+        Sometimes the birds would not enter the feeding area, even when empty.
+        Sometimes the birds would not notify the feeding area when they were hungry.
+        After working on this project for many hours and days without rest, the programmers started to go crazy and were very tired.
+        After typing the word \'bird\' over and over during all this, they started to misspell bird, especially when typing very fast.
+        Bird became birb.
+        \n \n
+        Now, computer programmers are not very artist people and can not draw very well, especially when tired and crazy.
+        But they needed to have pictures of the feeding process to assist them in keeping the stages correct.
+        They did their very best to draw a bird, but it was not entirely bird like. It was rather unproportional.
+        Its legs and wings were small for its overly large body.
+        The programmers also drew accessories on these birds, to keep track of which bird was which.
+        And we all know that real birds do not wear accessories or clothes.
+        This, with the pictures of these \'birds\' posted everywhere, with their sleep deprivation, and their typing birb over and over, is how birbs were created.
+        Now birbs appear everywhere. They can be found on whiteboards, in games, in chat, and many many other places.
+    </string>
 </resources>
