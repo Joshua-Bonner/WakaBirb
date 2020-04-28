@@ -16,7 +16,7 @@ public interface ScoreDAO {
     LiveData<List<Score>> getAllScores();
 
     @Query("Select * from scores where points=(Select max(points) from scores)")
-    LiveData<List<Score>> getMaxScores();
+    List<Score> getMaxScores();
 
 
     @Insert

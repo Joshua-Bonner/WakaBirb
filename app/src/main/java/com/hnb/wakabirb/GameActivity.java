@@ -115,10 +115,11 @@ public class GameActivity extends AppCompatActivity {
             public void onFinish() {
                 //TODO fix merge conflict
                 Intent resultIntent = new Intent(GameActivity.this, ResultsActivity.class);
-                resultIntent.putExtra("SignedIn",getIntent().getBooleanExtra("signedIn", false));
+                resultIntent.putExtra("signedIn",getIntent().getBooleanExtra("signedIn", false));
                 resultIntent.putExtra("name", getIntent().getStringExtra("name"));
                 resultIntent.putExtra("score", gameScore);
                 startActivity(resultIntent);
+                finish();
             }
         }.start();
     }
@@ -142,7 +143,6 @@ public class GameActivity extends AppCompatActivity {
     @Override
     protected void onDestroy(){
         super.onDestroy();
-        backgroundMusic.stop();
     }
 
     public void onBirbWhacked(View imageButton){

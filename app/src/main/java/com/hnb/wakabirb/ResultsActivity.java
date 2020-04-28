@@ -27,6 +27,10 @@ import com.google.android.gms.tasks.Task;
 import com.hnb.wakabirb.roomdb.Score;
 import com.hnb.wakabirb.roomdb.ScoreDatabase;
 
+import java.util.GregorianCalendar;
+import java.util.List;
+import java.util.Random;
+
 import static com.hnb.wakabirb.MainActivity.backgroundMusic;
 
 public class ResultsActivity extends AppCompatActivity {
@@ -37,6 +41,7 @@ public class ResultsActivity extends AppCompatActivity {
     SharedPreferences sharedPreferences;
     Boolean musicOn;
     Boolean soundEffectsOn;
+    Boolean signedIn;
 
     public static final String mOnKey = "musicOnKey";
     public static final String seOnKey = "seOnKey";
@@ -44,7 +49,6 @@ public class ResultsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_results);
         Intent intent = getIntent();
@@ -61,40 +65,57 @@ public class ResultsActivity extends AppCompatActivity {
 
         signInClient = GoogleSignIn.getClient(this, new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_GAMES_SIGN_IN).build()); //sign in to google play games
         GoogleSignInAccount signInAccount = GoogleSignIn.getLastSignedInAccount(this);
+        signedIn = getIntent().getBooleanExtra("signedIn", false) && signInAccount != null; //make sure the user signed in and we still have an account
 
-        if (!getIntent().getBooleanExtra("signedIn", false)) {
-            Games.getLeaderboardsClient(this, signInAccount).submitScore(getString(R.string.leaderboard_top_scores), getIntent().getIntExtra("score", 0));
+        if (signedIn) {
+            Games.getLeaderboardsClient(this, signInAccount).submitScore(getString(R.string.leaderboard_top_scores), getIntent().getIntExtra("score", 0)); //submit the score to google play games
         }
 
         ScoreDatabase.getDatabase(this);
-        final Score[] topUserScore = new Score[1];
+
+        //first update the player's top score
         ScoreDatabase.getScore(getIntent().getStringExtra("name"), new ScoreDatabase.ScoreListener() {
             @Override
             public void onScoreReturned(Score score) {
-                topUserScore[0] = score;
+                if (score == null) { //the user has never played a game before, so we create a new one
+                    score = new Score(getIntent().getStringExtra("name"), getIntent().getIntExtra("score", 0), new GregorianCalendar());
+                    ScoreDatabase.insert(score);
+                } else if (getIntent().getIntExtra("score", 0) > score.points) {
+                    score.points = getIntent().getIntExtra("score", 0);
+                    ScoreDatabase.update(score);
+                }
+                ((TextView) findViewById(R.id.playerTopScore)).setText("Your Top Score: " + score.points);
             }
         });
-        //now we see if the score is null
-        if(topUserScore[0] == null) { //the user has never played a game before, so we create a new one
-            topUserScore[0] = new Score(getIntent().getStringExtra("name"), getIntent().getIntExtra("score", 0));
-            ScoreDatabase.insert(topUserScore[0]);
-        }
-        else {
-            if(getIntent().getIntExtra("score", 0) > topUserScore[0].points) {
-                topUserScore[0].points = getIntent().getIntExtra("score", 0);
+
+        //next update the device's top score
+
+        ScoreDatabase.getMaxScores(new ScoreDatabase.ScoreListListener() {
+            @Override
+            public void onScoreListReturned(List<Score> scores) {
+                if(scores.size() > 0) { //we have at least 1 max score
+                    //let's pick a random user and display their score in case there's more than 1
+                    Score toDisplay = scores.get(new Random().nextInt(scores.size()));
+                    ((TextView) findViewById(R.id.deviceTopScore)).setText("Local Top Score: " + toDisplay.points + " By: " + toDisplay.name);
+                }
+                else {
+                    findViewById(R.id.deviceTopScore).setVisibility(View.INVISIBLE); //we don't have any scores yet so we'll hide the local top scores
+                }
             }
-        }
+        });
+
+        //then we'll update the global top score if the user is signed in
+
 
         //now we hide the leaderboard button if the player isn't signed in
-        if(!getIntent().getBooleanExtra("signedIn", false)) {
+        if (!signedIn) {
             findViewById(R.id.leaderboard).setVisibility(View.GONE);
         }
+
 
         TextView finalScore = findViewById(R.id.finalScore);
         finalScore.setText("Score: " + String.valueOf(gameScore));
 
-        //now we get the rest of the scores
-        //first let's get the top of the
     }
 
     public void showLeaderboard(View view) {
@@ -132,8 +153,7 @@ public class ResultsActivity extends AppCompatActivity {
 
     public void onClickPlayAgain(View view) {
         backgroundMusic.reset();
-        Intent mainIntent = new Intent(this, MainActivity.class);
-        startActivity(mainIntent);
+        finish();
     }
 
     public void onClickQuitGame(View view) {
