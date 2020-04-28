@@ -13,14 +13,6 @@ public class ScoreViewModel extends AndroidViewModel {
         super(application);
     }
 
-    public void filterScores(String name) {
-        if(name.equals("")) {
-            getAllScores();
-        }
-        else {
-            scores = ScoreDatabase.getDatabase(getApplication()).ScoreDAO().getScoresByName(name);
-        }
-    }
 
     public void getAllScores() {
         scores = ScoreDatabase.getDatabase(getApplication()).ScoreDAO().getAllScores();

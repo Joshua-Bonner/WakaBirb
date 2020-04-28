@@ -25,11 +25,9 @@
         android:layout_width="130dp"
         android:layout_height="wrap_content"
         android:id="@+id/leaderboard"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/playAgain"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/playAgain"
-        android:layout_marginBottom="25dp"
-        app:layout_constraintHorizontal_bias="0.48"
+        app:layout_constraintBottom_toBottomOf="@+id/playAgain"
         android:text="Show Leaderboards"
         android:background="#689F38"
         android:onClick="showLeaderboard"/>
@@ -43,22 +41,21 @@
         android:onClick="onClickPlayAgain"
         android:text="@string/play_again"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.48"
+        app:layout_constraintEnd_toStartOf="@+id/leaderboard"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <Button
-        android:id="@+id/quitGame"
-        android:layout_width="130dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="30dp"
-        android:background="#F5001D"
-        android:onClick="onClickQuitGame"
-        android:text="Quit Game"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.48"
-        app:layout_constraintStart_toStartOf="parent" />
+<!--    <Button-->
+<!--        android:id="@+id/quitGame"-->
+<!--        android:layout_width="130dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginBottom="30dp"-->
+<!--        android:background="#F5001D"-->
+<!--        android:onClick="onClickQuitGame"-->
+<!--        android:text="Quit Game"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.48"-->
+<!--        app:layout_constraintStart_toStartOf="parent" />-->
 
     <TextView
         android:id="@+id/finalScore"
@@ -69,8 +66,49 @@
         android:textColor="#303F9F"
         android:textSize="36sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Results" />
+        app:layout_constraintTop_toBottomOf="@+id/Results"
+        android:text="Score: 000"/>
+
+    <TextView
+        android:id="@+id/playerTopScore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/finalScore"
+        android:layout_marginTop="16dp"
+        android:textSize="36sp"
+        android:textColor="#303F9F"
+        android:text="Your Top Score: 000"/>
+
+    <TextView
+        android:id="@+id/deviceTopScore"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/playerTopScore"
+        android:textSize="20sp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginTop="16dp"
+        android:textColor="#303F9F"
+        android:text="Local Top Score: 000 By Firstname Lastname"/>
+
+    <TextView
+            android:id="@+id/onlineTopScore"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/deviceTopScore"
+            android:textSize="20sp"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginTop="16dp"
+            android:textColor="#303F9F"
+            android:text="Global Top Score: 000 By Firstname Lastname"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

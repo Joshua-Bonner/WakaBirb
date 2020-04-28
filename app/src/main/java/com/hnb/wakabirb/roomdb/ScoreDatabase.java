@@ -7,13 +7,17 @@ import androidx.annotation.NonNull;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
-import androidx.room.TypeConverter;
 import androidx.room.TypeConverters;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
 @Database(entities = {Score.class}, version = 1, exportSchema = false)
 @TypeConverters({Converters.class})
 public abstract class ScoreDatabase extends RoomDatabase {
+
+    public interface ScoreListener {
+        void onScoreReturned(Score score);
+    }
+
     public abstract ScoreDAO ScoreDAO();
 
     private static ScoreDatabase INSTANCE;
@@ -53,5 +57,18 @@ public abstract class ScoreDatabase extends RoomDatabase {
                 return null;
             }
         }.execute(score);
+    }
+
+    public static void getScore(String name, final ScoreListener listener) {
+        new AsyncTask<String, Void, Score>() {
+            protected Score doInBackground(String... names) {
+                return INSTANCE.ScoreDAO().getScoresByName(names[0]);
+            }
+
+            protected void onPostExecute(Score score) {
+                super.onPostExecute(score);
+                listener.onScoreReturned(score);
+            }
+        }.execute(name);
     }
 }

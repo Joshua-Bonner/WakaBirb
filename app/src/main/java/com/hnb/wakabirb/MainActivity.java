@@ -51,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
     public static final String seOnKey = "seOnKey";
     public static final String TAG = "WakBirb";
 
+
     ConstraintLayout constraintLayout;
     public static MediaPlayer backgroundMusic;
 
@@ -146,6 +147,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void onClickStartGame(View button) {
         Intent gameIntent = new Intent(this, GameActivity.class);
+        gameIntent.putExtra("signedIn", signedIn);
+        gameIntent.putExtra("name", ((TextView) findViewById(R.id.EditUsrName)).getText().toString());
         startActivity(gameIntent);
     }
 

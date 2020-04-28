@@ -10,10 +10,14 @@ import androidx.room.Update;
 @Dao
 public interface ScoreDAO {
     @Query("SELECT * FROM scores WHERE name = :name ORDER BY points")
-    LiveData<List<Score>> getScoresByName(String name);
+    Score getScoresByName(String name);
 
     @Query("SELECT * FROM scores ORDER BY points")
     LiveData<List<Score>> getAllScores();
+
+    @Query("Select * from scores where points=(Select max(points) from scores)")
+    LiveData<List<Score>> getMaxScores();
+
 
     @Insert
     void insert(Score... scores);

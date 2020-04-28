@@ -20,6 +20,12 @@ public class Score {
 //    }
 
 
+    public Score(String name, int points) {
+        this.name = name;
+        this.points = points;
+        this.date = new GregorianCalendar();
+    }
+
     public Score(String name, int points, GregorianCalendar date) {
         this.name = name;
         this.points = points;
