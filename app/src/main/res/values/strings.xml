@@ -18,23 +18,23 @@
     <string name="start_game">Start Game</string>
     <string name="google_play_sign_in">Google Play Sign In</string>
     <string name="sign_in_to_google_play_games_to_post_your_scores_to_the_leaderboard">Sign in to Google Play Games to post your scores to the leaderboard</string>
-    <string name="coming_soon">Coming Soon!</string>
+    <string name="coming_soon">COMING SOON</string>
     <string name="waka_birb_shirt">Waka_birb_shirt</string>
-    <string name="waka_birb_merchanise">Waka Birb Merchanise</string>
+    <string name="waka_birb_merchanise">Waka Birb Merchandise</string>
     <string name="birb_history">Birb History</string>
     <string name="purple_birb">Purple Birb</string>
     <string name="red_birb">Red Birb</string>
-    <string name="Click">Click</string>
+    <string name="Click">CLICK</string>
     <string name="white_waka_birb_t_shirt">white waka birb t-shirt</string>
     <string name="waka_birb_apparel">Waka Birb Apparel</string>
     <string name="also_by_hnb_enterprise">Also by HnB Enterprise:</string>
     <string name="like_birbs">Like Birbs</string>
-    <string name="history">Birb History</string>
+    <string name="history">BIRB HISTORY</string>
     <string name="historyWriteUp">
         A long time ago, in a land far far away, a group of computer programmers were working on a project.
         This project involved a system for feeding birds.
         There were many birds wanting to be fed but only 5 birds could be inside the feeding area at time.
-        Therefore the programmers had to device a mechanism that would allow the birds to notify the feeding area that they were hungry.
+        Therefore the programmers had to devise a mechanism that would allow the birds to notify the feeding area that they were hungry.
         \n \n
         While working on this mechanism, many problems came about.
         Sometimes too many birds would get into the feeding area.

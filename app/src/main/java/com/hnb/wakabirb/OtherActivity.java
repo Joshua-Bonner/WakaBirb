@@ -15,6 +15,7 @@ import static com.hnb.wakabirb.MainActivity.backgroundMusic;
 public class OtherActivity extends AppCompatActivity {
     SharedPreferences sharedPreferences;
     Boolean musicOn;
+    Boolean switchedActivity;
     public static final String mOnKey = "musicOnKey";
     public static final String seOnKey = "seOnKey";
 
@@ -35,12 +36,16 @@ public class OtherActivity extends AppCompatActivity {
 
     public void onClickBirbHistory(View button) {
         Intent historyIntent = new Intent(this, HistoryActivity.class);
+        switchedActivity = true;
         startActivity(historyIntent);
+        finish();
     }
 
     public void onClickBirbStore(View button) {
         Intent storeIntent = new Intent(this, StoreActivity.class);
+        switchedActivity = true;
         startActivity(storeIntent);
+        finish();
     }
 
     @Override
@@ -62,12 +67,14 @@ public class OtherActivity extends AppCompatActivity {
     @Override
     protected void onDestroy(){
         super.onDestroy();
-        backgroundMusic.stop();
+        if (!switchedActivity) backgroundMusic.stop();
     }
 
     public void onClickGoBack(View view) {
         Intent mainIntent = new Intent(this, MainActivity.class);
         startActivity(mainIntent);
+        switchedActivity = true;
+        finish();
     }
 
 }

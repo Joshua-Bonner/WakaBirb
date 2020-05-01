@@ -16,7 +16,7 @@
         android:padding="12dp"
         android:text="@string/history"
         android:textColor="#F00"
-        android:textSize="28sp"
+        android:textSize="24sp"
         app:fontName="Jelly Crazies.ttf"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"

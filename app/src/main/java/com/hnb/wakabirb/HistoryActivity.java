@@ -15,6 +15,7 @@ import static com.hnb.wakabirb.MainActivity.backgroundMusic;
 public class HistoryActivity extends AppCompatActivity {
     SharedPreferences sharedPreferences;
     Boolean musicOn;
+    Boolean switchedActivity;
     public static final String mOnKey = "musicOnKey";
     public static final String seOnKey = "seOnKey";
 
@@ -55,11 +56,13 @@ public class HistoryActivity extends AppCompatActivity {
     @Override
     protected void onDestroy(){
         super.onDestroy();
-        backgroundMusic.stop();
+        if (!switchedActivity) backgroundMusic.stop();
     }
 
     public void onClickGoBack(View view) {
         Intent otherIntent = new Intent(this, OtherActivity.class);
+        switchedActivity = true;
         startActivity(otherIntent);
+        finish();
     }
 }

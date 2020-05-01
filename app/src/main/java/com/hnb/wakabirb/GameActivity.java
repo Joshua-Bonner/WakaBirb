@@ -113,7 +113,6 @@ public class GameActivity extends AppCompatActivity {
 
             @Override
             public void onFinish() {
-                //TODO fix merge conflict
                 Intent resultIntent = new Intent(GameActivity.this, ResultsActivity.class);
                 resultIntent.putExtra("signedIn",getIntent().getBooleanExtra("signedIn", false));
                 resultIntent.putExtra("name", getIntent().getStringExtra("name"));

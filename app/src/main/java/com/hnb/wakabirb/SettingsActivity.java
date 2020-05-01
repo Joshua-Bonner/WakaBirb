@@ -5,6 +5,8 @@ import android.preference.PreferenceFragment;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import static com.hnb.wakabirb.MainActivity.backgroundMusic;
+
 public class SettingsActivity extends AppCompatActivity {
 
     @Override
@@ -19,8 +21,6 @@ public class SettingsActivity extends AppCompatActivity {
             super.onCreate(savedInstanceState);
 
             addPreferencesFromResource(R.xml.preferences);
-
-
         }
     }
 }

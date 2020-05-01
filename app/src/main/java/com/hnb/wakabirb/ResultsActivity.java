@@ -37,7 +37,7 @@ public class ResultsActivity extends AppCompatActivity {
 
 
     private GoogleSignInClient signInClient;
-
+    Boolean switchedActivity;
     SharedPreferences sharedPreferences;
     Boolean musicOn;
     Boolean soundEffectsOn;
@@ -148,11 +148,14 @@ public class ResultsActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        backgroundMusic.stop();
+        if (!switchedActivity) backgroundMusic.stop();
     }
 
     public void onClickPlayAgain(View view) {
         backgroundMusic.reset();
+        Intent mainActivity = new Intent(ResultsActivity.this, MainActivity.class);
+        switchedActivity = true;
+        startActivity(mainActivity);
         finish();
     }
 

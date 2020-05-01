@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
     SharedPreferences sharedPreferences;
     Boolean musicOn;
     Boolean soundEffectsOn;
+    Boolean switchedActivity;
     boolean signedIn = false;
     private GoogleSignInClient signInClient;
     private PlayersClient mPlayersClient;
@@ -85,9 +86,7 @@ public class MainActivity extends AppCompatActivity {
         // PUTTING IN A VALUE FOR USERNAME
         userName.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence userName, int start, int count, int after) {
-
-            }
+            public void beforeTextChanged(CharSequence userName, int start, int count, int after) { }
 
             @Override
             public void onTextChanged(CharSequence userName, int start, int before, int count) {
@@ -102,9 +101,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @Override
-            public void afterTextChanged(Editable userName) {
-                // TODO: QUERY FOR THE EXISTENCE OF THE USERNAME AND RETRIEVE ASSOCIATED DATA
-            }
+            public void afterTextChanged(Editable userName) { }
         });
 
         if (musicOn){
@@ -149,7 +146,9 @@ public class MainActivity extends AppCompatActivity {
         Intent gameIntent = new Intent(this, GameActivity.class);
         gameIntent.putExtra("signedIn", signedIn);
         gameIntent.putExtra("name", ((TextView) findViewById(R.id.EditUsrName)).getText().toString());
+        switchedActivity = true;
         startActivity(gameIntent);
+        finish();
     }
 
     public void playGamesSignIn(View Button) {
@@ -198,7 +197,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onDestroy(){
         super.onDestroy();
-        backgroundMusic.stop();
+        if (!switchedActivity) backgroundMusic.stop();
     }
 
     @Override
