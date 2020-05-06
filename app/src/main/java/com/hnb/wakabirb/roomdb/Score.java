@@ -9,7 +9,7 @@ import androidx.room.TypeConverter;
 
 import java.util.GregorianCalendar;
 
-@Entity(tableName="scores")
+@Entity(tableName = "scores")
 public class Score {
 
     public Score(String name, int points, GregorianCalendar date) {

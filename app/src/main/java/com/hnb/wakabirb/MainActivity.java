@@ -86,7 +86,8 @@ public class MainActivity extends AppCompatActivity {
         // PUTTING IN A VALUE FOR USERNAME
         userName.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence userName, int start, int count, int after) { }
+            public void beforeTextChanged(CharSequence userName, int start, int count, int after) {
+            }
 
             @Override
             public void onTextChanged(CharSequence userName, int start, int before, int count) {
@@ -101,14 +102,15 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @Override
-            public void afterTextChanged(Editable userName) { }
+            public void afterTextChanged(Editable userName) {
+            }
         });
 
-        if (musicOn){
+        if (musicOn) {
             backgroundMusic = new MediaPlayer();
             backgroundMusic = MediaPlayer.create(this, R.raw.legrandchase);
             backgroundMusic.setLooping(true);
-            backgroundMusic.setVolume(0.5f,0.5f);
+            backgroundMusic.setVolume(0.5f, 0.5f);
             backgroundMusic.start();
         }
     }
@@ -122,7 +124,7 @@ public class MainActivity extends AppCompatActivity {
                     backgroundMusic = new MediaPlayer();
                     backgroundMusic = MediaPlayer.create(MainActivity.this, R.raw.legrandchase);
                     backgroundMusic.setLooping(true);
-                    backgroundMusic.setVolume(0.5f,0.5f);
+                    backgroundMusic.setVolume(0.5f, 0.5f);
                     backgroundMusic.start();
                 } else {
                     if (backgroundMusic.isPlaying()) {
@@ -130,7 +132,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
             }
-            if(key.equals("seOnKey")){
+            if (key.equals("seOnKey")) {
                 soundEffectsOn = !soundEffectsOn;
             }
         }
@@ -167,7 +169,7 @@ public class MainActivity extends AppCompatActivity {
             Intent settingsIntent = new Intent(this, SettingsActivity.class);
             startActivity(settingsIntent);
         }
-        if(id == R.id.other_stuff){
+        if (id == R.id.other_stuff) {
             Intent otherIntent = new Intent(this, OtherActivity.class);
             startActivity(otherIntent);
         }
@@ -181,21 +183,21 @@ public class MainActivity extends AppCompatActivity {
         preferencesEditor.putBoolean(mOnKey, musicOn);
         preferencesEditor.putBoolean(seOnKey, soundEffectsOn);
         preferencesEditor.apply();  //apply saves async whereas commit saves sync
-        if(backgroundMusic != null){
+        if (backgroundMusic != null) {
             backgroundMusic.pause();
         }
     }
 
     @Override
-    protected void onResume(){
+    protected void onResume() {
         super.onResume();
-        if(musicOn){
+        if (musicOn) {
             backgroundMusic.start();
         }
     }
 
     @Override
-    protected void onDestroy(){
+    protected void onDestroy() {
         super.onDestroy();
         if (!switchedActivity) backgroundMusic.stop();
     }

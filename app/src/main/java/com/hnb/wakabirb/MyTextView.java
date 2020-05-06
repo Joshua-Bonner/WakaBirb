@@ -24,11 +24,11 @@ public class MyTextView extends TextView {
     }
 
     private void init(AttributeSet attrs) {
-        if (attrs!=null) {
+        if (attrs != null) {
             TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.MyTextView);
             String fontName = a.getString(R.styleable.MyTextView_fontName);
-            if (fontName!=null) {
-                Typeface myTypeface = Typeface.createFromAsset(getContext().getAssets(), "fonts/"+fontName);
+            if (fontName != null) {
+                Typeface myTypeface = Typeface.createFromAsset(getContext().getAssets(), "fonts/" + fontName);
                 setTypeface(myTypeface);
             }
             a.recycle();

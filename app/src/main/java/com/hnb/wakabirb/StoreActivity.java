@@ -20,15 +20,15 @@ public class StoreActivity extends AppCompatActivity {
     public static final String seOnKey = "seOnKey";
 
     @Override
-    protected void onCreate (Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_store);
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         musicOn = sharedPreferences.getBoolean(mOnKey, true);
 
-        if(musicOn){
-            backgroundMusic.setVolume(0.5f,0.5f);
+        if (musicOn) {
+            backgroundMusic.setVolume(0.5f, 0.5f);
             backgroundMusic.start();
         }
     }
@@ -36,21 +36,21 @@ public class StoreActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        if(backgroundMusic != null){
+        if (backgroundMusic != null) {
             backgroundMusic.pause();
         }
     }
 
     @Override
-    protected void onResume(){
+    protected void onResume() {
         super.onResume();
-        if(musicOn){
+        if (musicOn) {
             backgroundMusic.start();
         }
     }
 
     @Override
-    protected void onDestroy(){
+    protected void onDestroy() {
         super.onDestroy();
         if (!switchedActivity) backgroundMusic.stop();
     }

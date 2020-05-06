@@ -93,13 +93,16 @@ public class ResultsActivity extends AppCompatActivity {
         ScoreDatabase.getMaxScores(new ScoreDatabase.ScoreListListener() {
             @Override
             public void onScoreListReturned(List<Score> scores) {
-                if(scores.size() > 0) { //we have at least 1 max score
+                if (scores.size() > 0) { //we have at least 1 max score
                     //let's pick a random user and display their score in case there's more than 1
                     Score toDisplay = scores.get(new Random().nextInt(scores.size()));
-                    ((TextView) findViewById(R.id.deviceTopScore)).setText("Local Top Score: " + toDisplay.points + " By: " + toDisplay.name);
-                }
-                else {
-                    findViewById(R.id.deviceTopScore).setVisibility(View.INVISIBLE); //we don't have any scores yet so we'll hide the local top scores
+                    if (getIntent().getIntExtra("score", 0) < toDisplay.points) { //see if the user that just played is the high score or not
+                        ((TextView) findViewById(R.id.deviceTopScore)).setText("Local Top Score: " + toDisplay.points + " By: " + toDisplay.name);
+                    } else {
+                        ((TextView) findViewById(R.id.deviceTopScore)).setText("Local Top Score: " + getIntent().getIntExtra("score", 0) + " By: " + getIntent().getStringExtra("name"));
+                    }
+                } else {
+                    ((TextView) findViewById(R.id.deviceTopScore)).setText("Local Top Score: " + getIntent().getIntExtra("score", 0) + " By: " + getIntent().getStringExtra("name")); //we don't have any scores yet so we'll set it to the user's score
                 }
             }
         });

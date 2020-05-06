@@ -9,7 +9,7 @@ import java.util.List;
 public class ScoreViewModel extends AndroidViewModel {
     private LiveData<List<Score>> scores;
 
-    public ScoreViewModel (Application application) {
+    public ScoreViewModel(Application application) {
         super(application);
     }
 
