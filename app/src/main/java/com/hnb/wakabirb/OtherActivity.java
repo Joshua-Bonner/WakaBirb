@@ -2,10 +2,8 @@ package com.hnb.wakabirb;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.view.KeyEvent;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -42,7 +40,7 @@ public class OtherActivity extends AppCompatActivity {
     }
 
     public void onClickBirbStore(View button) {
-        Intent storeIntent = new Intent(this, StoreActivity.class);
+        Intent storeIntent = new Intent(this, CreditsActivity.class);
         switchedActivity = true;
         startActivity(storeIntent);
         finish();

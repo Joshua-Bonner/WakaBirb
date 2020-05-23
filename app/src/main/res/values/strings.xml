@@ -18,7 +18,7 @@
     <string name="start_game">Start Game</string>
     <string name="google_play_sign_in">Google Play Sign In</string>
     <string name="sign_in_to_google_play_games_to_post_your_scores_to_the_leaderboard">Sign in to Google Play Games to post your scores to the leaderboard</string>
-    <string name="coming_soon">COMING SOON</string>
+    <string name="credits">Credits</string>
     <string name="waka_birb_shirt">Waka_birb_shirt</string>
     <string name="waka_birb_merchanise">Waka Birb Merchandise</string>
     <string name="birb_history">Birb History</string>
@@ -54,5 +54,21 @@
         And we all know that real birds do not wear accessories or clothes.
         This, with the pictures of these \'birds\' posted everywhere, with their sleep deprivation, and their typing birb over and over, is how birbs were created.
         Now birbs appear everywhere. They can be found on whiteboards, in games, in chat, and many many other places.
+    </string>
+    <string name="credittext">
+        Music:
+        Le Grand Chase By Kevin MacLeod (incompetech.com)\n
+        Licensed under Creative Commons: By Attribution 3.0\n
+        http://creativecommons.org/licenses/by/3.0/\n\n
+
+        Programmers:\n
+        Richard Bowser\n
+        Joshua Bonner\n
+        Alyssa Abram\n\n
+
+        Artists:\n
+        Richard Bowser: Background and nests\n
+        Jacob Gallucci: Birbs\n
+
     </string>
 </resources>
