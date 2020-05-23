@@ -1,37 +1,27 @@
-package com.hnb.wakabirb;
+package ga.hnbenterprises.wakabirb;
 
 import android.content.Intent;
-import android.util.Log;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.SharedPreferences;
-import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.games.Games;
-import com.google.android.gms.games.LeaderboardsClient;
-import com.google.android.gms.games.PlayersClient;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.hnb.wakabirb.roomdb.Score;
-import com.hnb.wakabirb.roomdb.ScoreDatabase;
+import ga.hnbenterprises.wakabirb.R;
+import ga.hnbenterprises.wakabirb.roomdb.Score;
+import ga.hnbenterprises.wakabirb.roomdb.ScoreDatabase;
 
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Random;
-
-import static com.hnb.wakabirb.MainActivity.backgroundMusic;
 
 public class ResultsActivity extends AppCompatActivity {
 
@@ -59,8 +49,8 @@ public class ResultsActivity extends AppCompatActivity {
         soundEffectsOn = sharedPreferences.getBoolean(seOnKey, true);
 
         if (musicOn) {
-            backgroundMusic.setVolume(0.50f, 0.50f);
-            backgroundMusic.start();
+            MainActivity.backgroundMusic.setVolume(0.50f, 0.50f);
+            MainActivity.backgroundMusic.start();
         }
 
         signInClient = GoogleSignIn.getClient(this, new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_GAMES_SIGN_IN).build()); //sign in to google play games
@@ -135,8 +125,8 @@ public class ResultsActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        if (backgroundMusic != null) {
-            backgroundMusic.pause();
+        if (MainActivity.backgroundMusic != null) {
+            MainActivity.backgroundMusic.pause();
         }
     }
 
@@ -144,18 +134,18 @@ public class ResultsActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         if (musicOn) {
-            backgroundMusic.start();
+            MainActivity.backgroundMusic.start();
         }
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (!switchedActivity) backgroundMusic.stop();
+        if (!switchedActivity) MainActivity.backgroundMusic.stop();
     }
 
     public void onClickPlayAgain(View view) {
-        backgroundMusic.reset();
+        MainActivity.backgroundMusic.reset();
         Intent mainActivity = new Intent(ResultsActivity.this, MainActivity.class);
         switchedActivity = true;
         startActivity(mainActivity);
@@ -163,7 +153,7 @@ public class ResultsActivity extends AppCompatActivity {
     }
 
     public void onClickQuitGame(View view) {
-        backgroundMusic.stop();
+        MainActivity.backgroundMusic.stop();
         this.finishAffinity();
         System.exit(0);
     }

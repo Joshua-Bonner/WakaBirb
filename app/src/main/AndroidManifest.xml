@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.hnb.wakabirb">
+    package="ga.hnbenterprises.wakabirb">
 
     <application
         android:allowBackup="true"
@@ -19,31 +19,31 @@
                 android:name="preloaded_fonts"
                 android:resource="@array/preloaded_fonts"/>
 
-        <activity android:name=".ResultsActivity"
+        <activity android:name="ga.hnbenterprises.wakabirb.ResultsActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity"></activity>
-        <activity android:name=".GameActivity"
+        <activity android:name="ga.hnbenterprises.wakabirb.GameActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity"/>
-        <activity android:name=".SettingsActivity"
+        <activity android:name="ga.hnbenterprises.wakabirb.SettingsActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity"/>
-        <activity android:name=".OtherActivity"
+        <activity android:name="ga.hnbenterprises.wakabirb.OtherActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity"/>
-        <activity android:name=".HistoryActivity"
+        <activity android:name="ga.hnbenterprises.wakabirb.HistoryActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity"/>
-        <activity android:name=".CreditsActivity"
+        <activity android:name="ga.hnbenterprises.wakabirb.CreditsActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity"/>
-        <activity android:name=".MainActivity"
+        <activity android:name="ga.hnbenterprises.wakabirb.MainActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity">

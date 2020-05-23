@@ -1,4 +1,4 @@
-package com.hnb.wakabirb;
+package ga.hnbenterprises.wakabirb;
 
 import org.junit.Test;
 

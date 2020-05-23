@@ -1,27 +1,19 @@
-package com.hnb.wakabirb;
+package ga.hnbenterprises.wakabirb;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.media.AudioAttributes;
-import android.media.AudioManager;
 import android.media.MediaPlayer;
-import android.media.SoundPool;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.preference.PreferenceManager;
-import android.provider.MediaStore;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import ga.hnbenterprises.wakabirb.R;
 
 import java.util.Random;
-import java.util.Timer;
-import java.util.TimerTask;
-
-import static com.hnb.wakabirb.MainActivity.backgroundMusic;
 
 public class GameActivity extends AppCompatActivity {
     SharedPreferences sharedPreferences;
@@ -49,8 +41,8 @@ public class GameActivity extends AppCompatActivity {
         soundEffectsOn = sharedPreferences.getBoolean(seOnKey, true);
 
         if (musicOn) {
-            backgroundMusic.setVolume(0.25f, 0.25f);
-            backgroundMusic.start();
+            MainActivity.backgroundMusic.setVolume(0.25f, 0.25f);
+            MainActivity.backgroundMusic.start();
         }
 
         final TextView time = findViewById(R.id.time);
@@ -126,8 +118,8 @@ public class GameActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        if (backgroundMusic != null) {
-            backgroundMusic.pause();
+        if (MainActivity.backgroundMusic != null) {
+            MainActivity.backgroundMusic.pause();
         }
     }
 
@@ -135,7 +127,7 @@ public class GameActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         if (musicOn) {
-            backgroundMusic.start();
+            MainActivity.backgroundMusic.start();
         }
     }
 

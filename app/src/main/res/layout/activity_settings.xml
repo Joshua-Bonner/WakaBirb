@@ -8,6 +8,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id= "@+id/frag_settings"
-        class = "com.hnb.wakabirb.SettingsActivity$SettingsFragment"/>
+        class = "ga.hnbenterprises.wakabirb.SettingsActivity$SettingsFragment"/>
 
 </FrameLayout>

@@ -1,4 +1,4 @@
-package com.hnb.wakabirb;
+package ga.hnbenterprises.wakabirb;
 
 import android.content.Context;
 
@@ -22,6 +22,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
 
-        assertEquals("com.hnb.wakabirb", appContext.getPackageName());
+        assertEquals("ga.hnbenterprises.wakabirb", appContext.getPackageName());
     }
 }

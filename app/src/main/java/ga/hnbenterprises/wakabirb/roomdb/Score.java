@@ -1,11 +1,9 @@
-package com.hnb.wakabirb.roomdb;
+package ga.hnbenterprises.wakabirb.roomdb;
 
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
-import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
-import androidx.room.TypeConverter;
 
 import java.util.GregorianCalendar;
 

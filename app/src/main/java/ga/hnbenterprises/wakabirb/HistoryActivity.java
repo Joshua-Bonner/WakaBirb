@@ -1,16 +1,17 @@
-package com.hnb.wakabirb;
+package ga.hnbenterprises.wakabirb;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.text.method.ScrollingMovementMethod;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import ga.hnbenterprises.wakabirb.R;
 
-import static com.hnb.wakabirb.MainActivity.backgroundMusic;
-
-public class CreditsActivity extends AppCompatActivity {
+public class HistoryActivity extends AppCompatActivity {
     SharedPreferences sharedPreferences;
     Boolean musicOn;
     Boolean switchedActivity;
@@ -20,22 +21,26 @@ public class CreditsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_credits);
+        setContentView(R.layout.activity_history);
+
+        TextView tv = findViewById(R.id.birbHistoryText);
+        tv.setMovementMethod(new ScrollingMovementMethod());
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         musicOn = sharedPreferences.getBoolean(mOnKey, true);
 
         if (musicOn) {
-            backgroundMusic.setVolume(0.5f, 0.5f);
-            backgroundMusic.start();
+            MainActivity.backgroundMusic.setVolume(0.5f, 0.5f);
+            MainActivity.backgroundMusic.start();
         }
     }
+
 
     @Override
     protected void onPause() {
         super.onPause();
-        if (backgroundMusic != null) {
-            backgroundMusic.pause();
+        if (MainActivity.backgroundMusic != null) {
+            MainActivity.backgroundMusic.pause();
         }
     }
 
@@ -43,14 +48,14 @@ public class CreditsActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         if (musicOn) {
-            backgroundMusic.start();
+            MainActivity.backgroundMusic.start();
         }
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (!switchedActivity) backgroundMusic.stop();
+        if (!switchedActivity) MainActivity.backgroundMusic.stop();
     }
 
     public void onClickGoBack(View view) {

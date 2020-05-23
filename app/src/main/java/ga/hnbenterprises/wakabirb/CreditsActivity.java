@@ -1,4 +1,4 @@
-package com.hnb.wakabirb;
+package ga.hnbenterprises.wakabirb;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -7,10 +7,11 @@ import android.preference.PreferenceManager;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
+import ga.hnbenterprises.wakabirb.R;
 
-import static com.hnb.wakabirb.MainActivity.backgroundMusic;
+import static ga.hnbenterprises.wakabirb.MainActivity.backgroundMusic;
 
-public class OtherActivity extends AppCompatActivity {
+public class CreditsActivity extends AppCompatActivity {
     SharedPreferences sharedPreferences;
     Boolean musicOn;
     Boolean switchedActivity;
@@ -20,7 +21,7 @@ public class OtherActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_other);
+        setContentView(R.layout.activity_credits);
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         musicOn = sharedPreferences.getBoolean(mOnKey, true);
@@ -28,22 +29,7 @@ public class OtherActivity extends AppCompatActivity {
         if (musicOn) {
             backgroundMusic.setVolume(0.5f, 0.5f);
             backgroundMusic.start();
-
         }
-    }
-
-    public void onClickBirbHistory(View button) {
-        Intent historyIntent = new Intent(this, HistoryActivity.class);
-        switchedActivity = true;
-        startActivity(historyIntent);
-        finish();
-    }
-
-    public void onClickBirbStore(View button) {
-        Intent storeIntent = new Intent(this, CreditsActivity.class);
-        switchedActivity = true;
-        startActivity(storeIntent);
-        finish();
     }
 
     @Override
@@ -69,10 +55,9 @@ public class OtherActivity extends AppCompatActivity {
     }
 
     public void onClickGoBack(View view) {
-        Intent mainIntent = new Intent(this, MainActivity.class);
-        startActivity(mainIntent);
+        Intent otherIntent = new Intent(this, OtherActivity.class);
         switchedActivity = true;
+        startActivity(otherIntent);
         finish();
     }
-
 }

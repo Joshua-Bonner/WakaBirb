@@ -8,7 +8,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/background"
     android:id="@+id/mainConstraintLayout"
-    tools:context=".MainActivity">
+    tools:context="ga.hnbenterprises.wakabirb.MainActivity">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/my_toolbar"

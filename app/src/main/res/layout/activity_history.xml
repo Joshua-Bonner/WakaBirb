@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/background"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".HistoryActivity">
+    tools:context="ga.hnbenterprises.wakabirb.HistoryActivity">
 
     <TextView
         android:id="@+id/History"

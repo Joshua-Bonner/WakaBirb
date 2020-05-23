@@ -1,18 +1,17 @@
-package com.hnb.wakabirb;
+package ga.hnbenterprises.wakabirb;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.text.method.ScrollingMovementMethod;
 import android.view.View;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import ga.hnbenterprises.wakabirb.R;
 
-import static com.hnb.wakabirb.MainActivity.backgroundMusic;
+import static ga.hnbenterprises.wakabirb.MainActivity.backgroundMusic;
 
-public class HistoryActivity extends AppCompatActivity {
+public class OtherActivity extends AppCompatActivity {
     SharedPreferences sharedPreferences;
     Boolean musicOn;
     Boolean switchedActivity;
@@ -22,10 +21,7 @@ public class HistoryActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_history);
-
-        TextView tv = findViewById(R.id.birbHistoryText);
-        tv.setMovementMethod(new ScrollingMovementMethod());
+        setContentView(R.layout.activity_other);
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         musicOn = sharedPreferences.getBoolean(mOnKey, true);
@@ -33,9 +29,23 @@ public class HistoryActivity extends AppCompatActivity {
         if (musicOn) {
             backgroundMusic.setVolume(0.5f, 0.5f);
             backgroundMusic.start();
+
         }
     }
 
+    public void onClickBirbHistory(View button) {
+        Intent historyIntent = new Intent(this, HistoryActivity.class);
+        switchedActivity = true;
+        startActivity(historyIntent);
+        finish();
+    }
+
+    public void onClickBirbStore(View button) {
+        Intent storeIntent = new Intent(this, CreditsActivity.class);
+        switchedActivity = true;
+        startActivity(storeIntent);
+        finish();
+    }
 
     @Override
     protected void onPause() {
@@ -60,9 +70,10 @@ public class HistoryActivity extends AppCompatActivity {
     }
 
     public void onClickGoBack(View view) {
-        Intent otherIntent = new Intent(this, OtherActivity.class);
+        Intent mainIntent = new Intent(this, MainActivity.class);
+        startActivity(mainIntent);
         switchedActivity = true;
-        startActivity(otherIntent);
         finish();
     }
+
 }

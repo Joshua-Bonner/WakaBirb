@@ -1,11 +1,10 @@
-package com.hnb.wakabirb;
+package ga.hnbenterprises.wakabirb;
 
 import android.os.Bundle;
 import android.preference.PreferenceFragment;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import static com.hnb.wakabirb.MainActivity.backgroundMusic;
+import ga.hnbenterprises.wakabirb.R;
 
 public class SettingsActivity extends AppCompatActivity {
 

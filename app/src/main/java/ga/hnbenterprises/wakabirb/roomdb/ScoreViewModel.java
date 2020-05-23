@@ -1,4 +1,4 @@
-package com.hnb.wakabirb.roomdb;
+package ga.hnbenterprises.wakabirb.roomdb;
 
 import android.app.Application;
 import androidx.lifecycle.AndroidViewModel;
